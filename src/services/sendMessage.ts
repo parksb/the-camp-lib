@@ -46,7 +46,7 @@ async function sendMessage(cookies: Cookie, trainee: Trainee, message: Message) 
   });
 
   if (!response) {
-    throw new Error('Response is null');
+    throw new Error('Response is null.');
   }
 
   return response;

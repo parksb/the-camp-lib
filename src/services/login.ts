@@ -1,4 +1,4 @@
-import * as rp from 'request-promise';
+import requestPromise from 'request-promise';
 
 import { Cookie } from '../models';
 import { buildRequestUrl, resolveSessionCookies, addLog } from '../utils';
@@ -21,7 +21,7 @@ async function login(id: string, password: string) {
     },
   };
 
-  await rp.post(options, (err, res, body) => {
+  await requestPromise.post(options, (err, res, body) => {
     if (err) {
       throw new Error(err);
     }
@@ -36,7 +36,7 @@ async function login(id: string, password: string) {
   });
 
   if (!result) {
-    throw new Error('Result is null');
+    throw new Error('Result is null.');
   }
 
   return result;

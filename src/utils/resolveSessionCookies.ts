@@ -7,7 +7,7 @@ import { Cookie } from '../models';
  */
 function resolveSessionCookies(headerCookie: string[]): Cookie {
   if (_.isEmpty(headerCookie)) {
-    throw new Error('The cookie value of the header is empty');
+    throw new Error('The cookie values in the header are empty.');
   }
 
   const [scouter] = headerCookie.find((cookie) => {

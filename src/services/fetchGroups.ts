@@ -1,5 +1,6 @@
 import requestPromise from 'request-promise';
 import * as _ from 'lodash';
+
 import { Cookie, Group } from '../models';
 import { buildRequestUrl, addLog } from '../utils';
 
@@ -72,7 +73,7 @@ async function fetchGroups(cookies: Cookie, unitName?: string, enterDate?: strin
   });
 
   if (!result) {
-    throw new Error('Result is null');
+    throw new Error('Result is null.');
   }
 
   return _.flattenDeep([result]);
