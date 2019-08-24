@@ -1,2 +1,5 @@
 examples/
 src/
+.cache/
+tslint.json
+.env

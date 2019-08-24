@@ -1,6 +1,6 @@
 {
   "name": "the-camp-lib",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "대국민 국군 소통 서비스 더 캠프를 위한 비공식 라이브러리",
   "main": "dist/src/index.js",
   "scripts": {
