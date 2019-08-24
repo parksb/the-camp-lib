@@ -1,12 +1,10 @@
 {
   "name": "the-camp-lib",
-  "version": "1.0.0",
-  "description": "더 캠프를 외부에서 이용하기 위해 만든 비공식 라이브러리입니다.",
-  "main": "dist/index.js",
-  "source": "src/index.ts",
-  "types": "src/index.d.ts",
+  "version": "1.0.1",
+  "description": "대국민 국군 소통 서비스 더 캠프를 위한 비공식 라이브러리",
+  "main": "dist/src/index.js",
   "scripts": {
-    "build": "parcel build src/index.ts --target node"
+    "build": "tsc"
   },
   "author": "ParkSB",
   "license": "MIT",
@@ -24,7 +22,6 @@
     "@types/node": "^12.7.2",
     "@types/request": "^2.48.2",
     "@types/request-promise": "^4.1.44",
-    "parcel-bundler": "^1.12.3",
     "tslint": "^5.19.0",
     "tslint-config-airbnb": "^5.11.1",
     "typescript": "^3.5.3"

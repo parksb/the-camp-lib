@@ -1,5 +1,5 @@
 import * as request from 'request';
-import * as rp from 'request-promise';
+import requestPromise from 'request-promise';
 
 import { Trainee, Message, Cookie } from '../models';
 import { buildRequestUrl, addLog } from '../utils';
@@ -11,7 +11,7 @@ import { buildRequestUrl, addLog } from '../utils';
  * @param message - 인터넷 편지 정보
  */
 async function sendMessage(cookies: Cookie, trainee: Trainee, message: Message) {
-  let response: request.Response;
+  let response: request.Response | null = null;
   const options = {
     uri: buildRequestUrl('message/letter/insert.do'),
     method: 'POST',
@@ -31,7 +31,7 @@ async function sendMessage(cookies: Cookie, trainee: Trainee, message: Message) 
     },
   };
 
-  await rp(options, (err, res, body) => {
+  await requestPromise(options, (err, res, body) => {
     if (err) {
       throw new Error(err);
     }
@@ -44,6 +44,10 @@ async function sendMessage(cookies: Cookie, trainee: Trainee, message: Message) 
 
     response = res;
   });
+
+  if (!response) {
+    throw new Error('Response is null');
+  }
 
   return response;
 }

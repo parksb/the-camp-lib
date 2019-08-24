@@ -9,7 +9,7 @@ import { buildRequestUrl, resolveSessionCookies, addLog } from '../utils';
  * @param password - 계정 비밀번호
  */
 async function login(id: string, password: string) {
-  let result: Cookie;
+  let result: Cookie | null = null;
   const options = {
     uri: buildRequestUrl('common/login.do'),
     method: 'POST',
@@ -32,8 +32,12 @@ async function login(id: string, password: string) {
       throw new Error(body.resultMessage || 'Unknown error.');
     }
 
-    result = resolveSessionCookies(res.headers['set-cookie']);
+    result = resolveSessionCookies(res.headers['set-cookie'] || []);
   });
+
+  if (!result) {
+    throw new Error('Result is null');
+  }
 
   return result;
 }

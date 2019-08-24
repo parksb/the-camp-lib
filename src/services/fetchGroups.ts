@@ -1,4 +1,4 @@
-import * as rp from 'request-promise';
+import requestPromise from 'request-promise';
 import * as _ from 'lodash';
 import { Cookie, Group } from '../models';
 import { buildRequestUrl, addLog } from '../utils';
@@ -16,7 +16,7 @@ interface Response {
  * @param enterDate - 입소 날짜 (YYYYMMDD)
  */
 async function fetchGroups(cookies: Cookie, unitName?: string, enterDate?: string) {
-  let result: Group | Group[];
+  let result: Group | Group[] | null = null;
   const options = {
     uri: buildRequestUrl('troop/group/getMyGroupList.do'),
     method: 'POST',
@@ -27,7 +27,7 @@ async function fetchGroups(cookies: Cookie, unitName?: string, enterDate?: strin
     },
   };
 
-  await rp(options, (err, res, body) => {
+  await requestPromise(options, (err, res, body) => {
     if (err) {
       throw new Error(err);
     }
@@ -62,7 +62,7 @@ async function fetchGroups(cookies: Cookie, unitName?: string, enterDate?: strin
       if (unitName && enterDate) {
         result = groups.find((group: Group) => {
           return group.unitName === unitName.trim() && group.enterDate === enterDate;
-        });
+        }) || null;
       } else {
         result = groups;
       }
@@ -70,6 +70,10 @@ async function fetchGroups(cookies: Cookie, unitName?: string, enterDate?: strin
       throw new Error('Group data not found.');
     }
   });
+
+  if (!result) {
+    throw new Error('Result is null');
+  }
 
   return _.flattenDeep([result]);
 }

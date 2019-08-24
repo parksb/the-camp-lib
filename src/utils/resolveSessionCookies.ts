@@ -1,3 +1,4 @@
+import * as _ from 'lodash';
 import { Cookie } from '../models';
 
 /**
@@ -5,13 +6,17 @@ import { Cookie } from '../models';
  * @param headerCookie - 헤더의 쿠키 값
  */
 function resolveSessionCookies(headerCookie: string[]): Cookie {
+  if (_.isEmpty(headerCookie)) {
+    throw new Error('The cookie value of the header is empty');
+  }
+
   const [scouter] = headerCookie.find((cookie) => {
     return cookie.includes('SCOUTER=');
-  }).match(/SCOUTER=(\w|\d){14};/);
+  })!.match(/SCOUTER=(\w|\d){14};/)!;
 
   const [jsessionid] = headerCookie.find((cookie) => {
     return cookie.includes('JSESSIONID=');
-  }).match(/JSESSIONID=.*\.pcws\d{2};/);
+  })!.match(/JSESSIONID=.*\.pcws\d{2};/)!;
 
   return {
     scouter,
