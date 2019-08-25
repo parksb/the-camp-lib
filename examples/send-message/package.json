@@ -1,5 +1,5 @@
 {
-  "name": "send-daily-news",
+  "name": "send-message",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -7,6 +7,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "the-camp-lib": "^1.0.0"
+    "dotenv": "^8.1.0",
+    "the-camp-lib": "^1.2.0"
   }
 }
