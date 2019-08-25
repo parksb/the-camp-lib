@@ -32,7 +32,11 @@ async function login(id: string, password: string) {
       throw new Error(body.resultMessage || 'Unknown error.');
     }
 
-    result = resolveSessionCookies(res.headers['set-cookie'] || []);
+    if (!res.headers['set-cookie']) {
+      throw new Error('Cookies not found.');
+    }
+
+    result = resolveSessionCookies(res.headers['set-cookie']);
   });
 
   if (!result) {

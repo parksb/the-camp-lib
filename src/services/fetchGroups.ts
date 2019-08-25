@@ -4,9 +4,22 @@ import * as _ from 'lodash';
 import { Cookie, Group } from '../models';
 import { buildRequestUrl, addLog } from '../utils';
 
+interface GroupResponse {
+  unit_name: string;
+  full_name: string;
+  enter_date: string;
+  group_id: string;
+  group_name: string;
+  group_image: string;
+  access_date: string;
+  grade: number;
+  unit_code: string;
+  unit_type: number;
+}
+
 interface Response {
   result_code: number;
-  my_group: Group[];
+  my_group: GroupResponse[];
   recommend_group?: string;
 }
 
@@ -17,7 +30,7 @@ interface Response {
  * @param enterDate - 입소 날짜 (YYYYMMDD)
  */
 async function fetchGroups(cookies: Cookie, unitName?: string, enterDate?: string) {
-  let result: Group | Group[] | null = null;
+  let result: Group[] | null = null;
   const options = {
     uri: buildRequestUrl('troop/group/getMyGroupList.do'),
     method: 'POST',
@@ -44,7 +57,7 @@ async function fetchGroups(cookies: Cookie, unitName?: string, enterDate?: strin
       const data: Response = body.resultData;
 
       for (const list in data) {
-        const parsedData = JSON.parse(data[list]).my_group[0];
+        const parsedData: GroupResponse = JSON.parse(data[list]).my_group[0];
         const group: Group = {
           unitName: parsedData.unit_name,
           fullName: parsedData.full_name,
@@ -61,22 +74,28 @@ async function fetchGroups(cookies: Cookie, unitName?: string, enterDate?: strin
       }
 
       if (unitName && enterDate) {
-        result = groups.find((group: Group) => {
+        const searchedGroup: Group | undefined = groups.find((group: Group) => {
           return group.unitName === unitName.trim() && group.enterDate === enterDate;
-        }) || null;
+        });
+
+        if (!searchedGroup) {
+          throw new Error('Searching group not found.');
+        }
+
+        result = [searchedGroup];
       } else {
-        result = groups;
+        result = _.flattenDeep(groups);
       }
     } else {
-      throw new Error('Group data not found.');
+      throw new Error('Response data not found.');
     }
   });
 
-  if (!result) {
+  if (!result || _.isEmpty(result)) {
     throw new Error('Result is null.');
   }
 
-  return _.flattenDeep([result]);
+  return result as Group[];
 }
 
 export { fetchGroups };
