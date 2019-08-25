@@ -1,5 +1,7 @@
 # THE CAMP Unofficial Library
 
+![npm version](https://img.shields.io/npm/v/the-camp-lib) ![npm license](https://img.shields.io/npm/l/the-camp-lib)
+
 대국민 국군 소통 서비스 [더 캠프](https://www.thecamp.or.kr)를 사이트 외부에서 이용하기 위해 만든 비공식 라이브러리입니다. 현재 인터넷 편지 발송을 중심으로 구현되어 있습니다.
 
 # Installation
@@ -13,10 +15,10 @@ $ npm install the-camp-lib --save
 ```js
 const thecamp = require('the-camp-lib');
 // or
-import theCampLib from 'the-camp-lib';
+import * as thecamp from 'the-camp-lib';
 
 async function main() {
-  const cookies = await theCampLib.login('user@email.com', 'password');
+  const cookies = await thecamp.login('user@email.com', 'password');
 }
 ```
 
