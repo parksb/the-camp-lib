@@ -1,12 +1,17 @@
 {
   "name": "the-camp-lib",
   "version": "1.0.0",
-  "description": "대국민 국군 소통 서비스 더 캠프를 위한 비공식 라이브러리",
-  "main": "dist/src/index.js",
+  "description": "대국민 국군 소통 서비스 더 캠프 비공식 라이브러리",
+  "homepage": "https://github.com/ParkSB/the-camp-lib/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ParkSB/the-camp-lib.git"
+  },
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc"
   },
-  "author": "ParkSB",
+  "author": "ParkSB <parkgds@gmail.com> (https://parksb.github.io/)",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^8.1.0",
