@@ -13,10 +13,10 @@ $ npm install the-camp-lib --save
 ```js
 const thecamp = require('the-camp-lib');
 // or
-import thecamp from 'the-camp-lib';
+import theCampLib from 'the-camp-lib';
 
 async function main() {
-  const cookies = await thecamp.login('user@email.com', 'password');
+  const cookies = await theCampLib.login('user@email.com', 'password');
 }
 ```
 
@@ -32,9 +32,9 @@ $ cd the-camp-lib
 $ npm install
 ```
 
-모든 코드는 src 디렉토리 아래에 있습니다. 차후 테스트 환경을 구축할 예정입니다. 그 전까지는 임의의 파일(`test.ts`)을 만들어 테스트할 코드를 작성하고 `ts-node test.ts`를 실행하는 방식으로 테스트 합니다.
+모든 코드는 src 디렉토리 아래에 있습니다. 차후 유닛 테스트 환경을 구축할 예정입니다. 그 전까지는 test/interaration 디렉토리 하위에 테스트할 코드를 작성하고 `ts-node filename.ts`를 실행하는 방식으로 테스트 합니다.
 
-쉘에서 `npm run build`를 실행하면 dist 디렉토리에 빌드된 파일이 만들어집니다. example 디렉토리에 예시 디렉토리를 만든 뒤 쉘에서 `npm init`, `npm install ../../ --save`를 실행하면 해당 디렉토리에 패키지가 설치됩니다. 이렇게 하면 로컬에서 배포 버전을 테스트할 수 있습니다.
+쉘에서 `npm run build`를 실행하면 dist 디렉토리에 빌드된 파일이 만들어집니다. test 디렉토리 하위에 예시 디렉토리를 만든 뒤 쉘에서 `npm init`, `npm install ../../ --save`를 실행하면 해당 디렉토리에 패키지가 설치됩니다. 이렇게 하면 로컬에서 배포 버전을 테스트할 수 있습니다.
 
 # Specifications
 
@@ -78,8 +78,8 @@ $ npm install
 
 * `title: string` - 편지 제목
 * `content: string` - 편지 내용 (2000자 이하)
-* `boardId?: string` - 구현 예정.
-* `fileInfo?: any[]` - 구현 예정.
+* `boardId?: string`
+* `fileInfo?: any[]` - 첨부 파일 정보 (구현 예정)
 
 ### `interface Group`
 
@@ -102,32 +102,32 @@ $ npm install
 
 더 캠프에 로그인해 세션 쿠키를 얻는다.
 
-* Parameters
+* **Parameters**
   * `id: string` - 더 캠프 계정 이메일.
   * `password: string` - 더 캠프 계정 비밀번호.
-* Return value
+* **Return value**
   * `Cookie` - 세션 식별을 위한 쿠키.
 
 ### `fetchGroups(cookies: Cookie, unitName?: string, enterDate?: string)`
 
 가입 카페 정보를 가져온다.
 
-* Parameters
+* **Parameters**
   * `cookies: Cookie` - 세션 식별을 위한 쿠키.
   * `unitName?: string (Optional)` - 훈련병이 소속된 연대/사단 이름 (ex. `00연대`, `00사단`)
   * `enterDate?: string (Optional)` - 훈련병 입소 날짜 (ex. `20190829`)
-* Retrun value
+* **Retrun value**
   * `Group[]` - 가입한 카페 목록. `unitName` 또는 `enterDate`가 주어지면 해당 훈련병이 소속된 카페만 `Group[]` 타입으로 반환한다.
 
 ### `sendMessage(cookies: Cookie, trainee: Trainee, message: Message)`
 
 인터넷 편지를 전송한다. 
 
-* Parameters
+* **Parameters**
   * `cookies: Cookie` - 세션 식별을 위한 쿠키.
   * `trainee: Trainee` - 훈련병 정보.
   * `message: Message` - 인터넷 편지 정보. `message.boardId`가 `null`이면 빈 문자열을, `message.fileInfo`가 `null`이면 빈 배열을 할당한다. 
-* Return value
+* **Return value**
   * `request.Response` - 요청에 대한 HTTP 응답.
 
 # Examples

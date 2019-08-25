@@ -1,5 +1,8 @@
 examples/
 src/
+test/
 .cache/
 tslint.json
+tsconfig.json
 .env
+.babelrc
