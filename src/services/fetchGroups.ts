@@ -26,7 +26,7 @@ interface Response {
 /**
  * 가입 카페 정보를 가져온다.
  * @param cookies - 세션 식별을 위한 쿠키
- * @param unitNumber - 연대/사단 이름
+ * @param unitName - 연대/사단 이름
  * @param enterDate - 입소 날짜 (YYYYMMDD)
  */
 async function fetchGroups(cookies: Cookie, unitName?: string, enterDate?: string) {

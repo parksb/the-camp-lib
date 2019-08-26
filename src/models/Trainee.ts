@@ -19,8 +19,8 @@ interface Trainee {
   unitCode: string; // 연대/사단 식별 코드
   groupId: string; // 카페 식별 코드
   traineeName: string; // 훈련병 이름
-  birth: number; // 훈령병 생년 월일 (YYYYMMDD)
-  relationship: Relationship; // 훈령병과의 관계
+  birth: number; // 훈련병 생년 월일 (YYYYMMDD)
+  relationship: Relationship; // 훈련병과의 관계
 }
 
 export { Trainee, Relationship };
