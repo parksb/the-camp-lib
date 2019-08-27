@@ -1,6 +1,6 @@
 # THE CAMP Unofficial Library
 
-![npm version](https://img.shields.io/npm/v/the-camp-lib) ![npm license](https://img.shields.io/npm/l/the-camp-lib)
+![npm downloads](https://img.shields.io/npm/dt/the-camp-lib?style=flat-square) ![npm version](https://img.shields.io/npm/v/the-camp-lib?style=flat-square) ![npm license](https://img.shields.io/npm/l/the-camp-lib?style=flat-square)
 
 대국민 국군 소통 서비스 [더 캠프](http://www.thecamp.or.kr/)를 사이트 외부에서 이용하기 위해 만든 비공식 라이브러리입니다. 현재 인터넷 편지 발송을 중심으로 구현되어 있습니다.
 
@@ -19,6 +19,22 @@ import * as thecamp from 'the-camp-lib';
 
 async function main() {
   const cookies = await thecamp.login('user@email.com', 'password');
+  const [group] = await thecamp.fetchGroups(cookies, '00연대', '20190829');
+
+  const trainee = {
+    traineeName: '박뫄뫄',
+    birth: '19981129',
+    unitCode: group.unitCode,
+    groupId: group.groupId,
+    relationship: thecamp.Relationship.FRIEND,
+  };
+
+  const message = {
+    title: '제목',
+    content: '내용',
+  };
+
+  await thecamp.sendMessage(cookies, trainee, message);
 }
 ```
 
@@ -130,11 +146,11 @@ $ npm install
   * `trainee: Trainee` - 훈련병 정보
   * `message: Message` - 인터넷 편지 정보. `message.boardId` 또는 `message.fileInfo`가 주어지지 않으면 각각 빈 문자열과 빈 배열을 할당한다. 
 * **Return value**
-  * `Promise<request.Response>` - 요청에 대한 HTTP 응답.
+  * `Promise<request.Response>` - 요청에 대한 HTTP 응답
 
 # Examples
 
-* [send-message](examples/send-message): 인터넷 편지 전송 예시.
+* [send-message](examples/send-message): 인터넷 편지 전송 예시
 
 # License
 
