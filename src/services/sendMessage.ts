@@ -49,7 +49,7 @@ async function sendMessage(cookies: Cookie, trainee: Trainee, message: Message) 
     throw new Error('Response is null.');
   }
 
-  return response;
+  return response as request.Response;
 }
 
 export { sendMessage };

@@ -43,7 +43,7 @@ async function login(id: string, password: string) {
     throw new Error('Result is null.');
   }
 
-  return result;
+  return result as Cookie;
 }
 
 export { login };
