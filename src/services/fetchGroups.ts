@@ -57,6 +57,7 @@ async function fetchGroups(cookies: Cookie, unitName?: string, enterDate?: strin
       const data: Response = body.resultData;
 
       for (const list in data) {
+        if (JSON.parse(data[list]).my_group == null) continue;
         const parsedData: GroupResponse = JSON.parse(data[list]).my_group[0];
         const group: Group = {
           unitName: parsedData.unit_name,
