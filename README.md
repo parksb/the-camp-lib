@@ -151,6 +151,7 @@ $ npm install
 # Examples
 
 * [send-message](examples/send-message): 인터넷 편지 전송 예시
+* [daily-news-for-trainee](https://github.com/ParkSB/daily-news-for-trainee): 뉴스 발송 프로젝트
 
 # License
 
