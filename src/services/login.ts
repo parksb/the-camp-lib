@@ -9,41 +9,44 @@ import { buildRequestUrl, resolveSessionCookies, addLog } from '../utils';
  * @param password - 계정 비밀번호
  */
 async function login(id: string, password: string) {
-  let result: Cookie | null = null;
   const options = {
-    uri: buildRequestUrl('common/login.do'),
+    url: buildRequestUrl('login/loginA.do'),
     method: 'POST',
     json: true,
-    body: {
-      'user-id': id,
-      'user-pwd': password,
-      subsType: 1,
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    form: {
+      state: 'email-login',
+      autoLoginYn: 'N',
+      userId: id,
+      userPwd: password,
     },
   };
 
-  await requestPromise.post(options, (err, res, body) => {
+  const result: Cookie = await requestPromise(options, (err, res, body) => {
     if (err) {
       throw new Error(err);
     }
 
     addLog('login', `${res.statusCode} ${res.statusMessage}`);
 
-    if (res.statusCode === 200 && body.resultCode !== 200) {
-      throw new Error(body.resultMessage || 'Unknown error.');
+    if (res.statusCode === 200 && body.resultCd !== '0000') {
+      throw new Error(body.resultMsg || 'Unknown error.');
     }
 
     if (!res.headers['set-cookie']) {
       throw new Error('Cookies not found.');
     }
 
-    result = resolveSessionCookies(res.headers['set-cookie']);
+    return resolveSessionCookies(res.headers['set-cookie']);
   });
 
   if (!result) {
     throw new Error('Result is null.');
   }
 
-  return result as Cookie;
+  return result;
 }
 
 export { login };

@@ -10,18 +10,13 @@ function resolveSessionCookies(headerCookie: string[]): Cookie {
     throw new Error('The cookie values in the header are empty.');
   }
 
-  const [scouter] = headerCookie.find((cookie) => {
-    return cookie.includes('SCOUTER=');
-  })!.match(/SCOUTER=(\w|\d){14};/)!;
+  const iuid = headerCookie.find((cookie) => {
+    return cookie.includes('iuid=');
+  })!.match(/iuid=\d{6};/)![0]
+    .replace(/iuid=/, '')
+    .replace(/;/, '');
 
-  const [jsessionid] = headerCookie.find((cookie) => {
-    return cookie.includes('JSESSIONID=');
-  })!.match(/JSESSIONID=.*\.pcws\d{2};/)!;
-
-  return {
-    scouter,
-    jsessionid,
-  };
+  return { iuid };
 }
 
 export { resolveSessionCookies };
