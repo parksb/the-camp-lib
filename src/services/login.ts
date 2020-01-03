@@ -1,7 +1,7 @@
 import requestPromise from 'request-promise';
 
 import { Cookie } from '../models';
-import { buildRequestUrl, resolveSessionCookies, addLog } from '../utils';
+import { addLog, buildRequestUrl } from '../utils';
 
 /**
  * 더 캠프에 로그인해 세션 쿠키를 얻는다.
@@ -35,11 +35,11 @@ async function login(id: string, password: string) {
       throw new Error(body.resultMsg || 'Unknown error.');
     }
 
-    if (!res.headers['set-cookie']) {
+    if (!body.iuid) {
       throw new Error('Cookies not found.');
     }
 
-    return resolveSessionCookies(res.headers['set-cookie']);
+    return body.iuid;
   });
 
   if (!result) {
