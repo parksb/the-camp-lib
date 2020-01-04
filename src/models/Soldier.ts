@@ -118,6 +118,7 @@ enum SoldierRelationship {
 
 /**
  * 군인 정보
+ * @class Soldier
  */
 class Soldier {
   private missSoldierClassCdNm: SoldierClassName; // 성분
@@ -132,6 +133,17 @@ class Soldier {
   private missSoldierRelationshipCd: SoldierRelationship; // 관계 코드
   private traineeMgrSeq?: string; // 훈련병 식별 코드
 
+  /**
+   * Soldier.인스턴스를 생성한다.
+   * @param {string} name 이름 (e.g., `'박뫄뫄'`)
+   * @param {string} birth 생년월일 (e.g., `'20011129'`)
+   * @param {string} enterDate 입영날짜 (e.g., `'20200829'`)
+   * @param {SoldierClassName} className 성분 (e.g., `'예비군인/훈련병'`)
+   * @param {SoldierGroupName} groupName 군종 (e.g., `'육군'`)
+   * @param {SoldierUnitName} unitName 입영부대 (e.g., `'28사단'`, `'육군훈련소(25연대)'`)
+   * @param {SoldierRelationship} relationship 관계 (e.g., `SoldierRelationship.FRIEND`)
+   * @memberof Soldier
+   */
   constructor(
     name: string,
     birth: string,
@@ -153,6 +165,11 @@ class Soldier {
     this.missSoldierRelationshipCd = relationship;
   }
 
+  /**
+   * 인스턴스를 복제한다.
+   * @returns 같은 속성을 가진 Soldier 인스턴스
+   * @memberof Soldier
+   */
   public clone() {
     return new Soldier(
       this.name,
@@ -165,42 +182,92 @@ class Soldier {
     );
   }
 
+  /**
+   * 이름을 반환한다.
+   * @returns 이름 (e.g., `'박뫄뫄'`)
+   * @memberof Soldier
+   */
   public getName() {
     return this.name;
   }
 
+  /**
+   * 생년월일을 반환한다.
+   * @returns 생년월일 (e.g., `'20011129'`)
+   * @memberof Soldier
+   */
   public getBirth() {
     return this.birth;
   }
 
+  /**
+   * 입영날짜를 반환한다.
+   * @returns 입영날짜 (e.g., `'20200829'`)
+   * @memberof Soldier
+   */
   public getEnterDate() {
     return this.enterDate;
   }
 
+  /**
+   * 성분을 반환한다.
+   * @returns 성분 (e.g., `'예비군인/훈련병'`)
+   * @memberof Soldier
+   */
   public getMissSoldierClassCdNm() {
     return this.missSoldierClassCdNm;
   }
 
+  /**
+   * 군종을 반환한다.
+   * @returns 군종 (e.g., `'육군'`)
+   * @memberof Soldier
+   */
   public getGrpCdNm() {
     return this.grpCdNm;
   }
 
+  /**
+   * 군종 코드를 반환한다.
+   * @returns 군종 코드 (e.g., `'0000010001'`)
+   * @memberof Soldier
+   */
   public getGrpCd() {
     return this.grpCd;
   }
 
+  /**
+   * 성분 코드를 반환한다.
+   * @returns 성분 코드 (e.g., `'0000490001'`)
+   * @memberof Soldier
+   */
   public getMissSoldierClassCd() {
     return this.missSoldierClassCd;
   }
 
+  /**
+   * 훈련병 식별 코드를 반환한다.
+   * @returns 훈련병 식별 코드
+   * @memberof Soldier
+   */
   public getTraineeMgrSeq() {
     return this.traineeMgrSeq;
   }
 
+  /**
+   * 입영부대 코드를 반환한다.
+   * @returns 입영부대 코드 (`'20121290100'`)
+   * @memberof Soldier
+   */
   public getTrainUnitCd() {
     return this.trainUnitCd;
   }
 
+  /**
+   * 훈련병 식별 코드를 설정한다.
+   * @param {string} traineeMgrSeq 훈련병 식별 코드
+   * @memberof Soldier
+   */
   public setTraineeMgrSeq(traineeMgrSeq: string) {
     this.traineeMgrSeq = traineeMgrSeq;
   }
