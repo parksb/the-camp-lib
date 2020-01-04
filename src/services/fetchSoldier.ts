@@ -34,9 +34,13 @@ async function fetchSoldiers(cookies: Cookie, soldier: Soldier) {
     addLog('fetchSoldier', `${res.statusCode} ${res.statusMessage}`);
 
     if (res.statusCode === 200 && body.resultCd !== '9999') {
-      throw new Error(body.resultMsg || 'Unknown error.');
+      throw new Error(body.resultMsg || '알 수 없는 에러.');
     }
   });
+
+  if (!response) {
+    throw new Error('응답 값이 없습니다.');
+  }
 
   const result: Soldier[] = response.listResult.map((fetchedSoldier) => {
     const { traineeMgrSeq, trainUnitEduSeq } = fetchedSoldier;
@@ -47,8 +51,8 @@ async function fetchSoldiers(cookies: Cookie, soldier: Soldier) {
     };
   });
 
-  if (!result) {
-    throw new Error('Result is null.');
+  if (!result || result.length === 0) {
+    throw new Error('해당하는 군인을 찾을 수 없습니다.');
   }
 
   return result;
