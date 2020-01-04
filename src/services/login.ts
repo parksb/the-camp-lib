@@ -24,7 +24,7 @@ async function login(id: string, password: string) {
     },
   };
 
-  const result: Cookie = await requestPromise(options, (err, res, body) => {
+  const response = await requestPromise(options, (err, res, body) => {
     if (err) {
       throw new Error(err);
     }
@@ -38,9 +38,9 @@ async function login(id: string, password: string) {
     if (!body.iuid) {
       throw new Error('Cookies not found.');
     }
-
-    return body.iuid;
   });
+
+  const result: Cookie = { iuid: response.iuid };
 
   if (!result) {
     throw new Error('Result is null.');
