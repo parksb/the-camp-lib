@@ -10,9 +10,9 @@ import * as models from '../../src/models';
   const password = process.env.USER_PWD!;
 
   const name = process.env.TRAINEE_NAME!;
-  const className = process.env.CLASS_NAME!;
-  const groupName = process.env.GROUP_NAME!;
-  const unitName = process.env.UNIT_NAME!;
+  const className = process.env.CLASS_NAME! as models.SoldierClassName;
+  const groupName = process.env.GROUP_NAME! as models.SoldierGroupName;
+  const unitName = process.env.UNIT_NAME! as models.SoldierUnitName;
   const enterDate = process.env.ENTER_DATE!;
   const birth = process.env.TRAINEE_BIRTH!;
 
@@ -20,9 +20,9 @@ import * as models from '../../src/models';
     name,
     birth,
     enterDate,
-    models.SoldierClassName[className],
-    models.SoldierGroupName[groupName],
-    models.SoldierUnitName[unitName],
+    className,
+    groupName,
+    unitName,
     models.SoldierRelationship.FRIEND,
   );
 

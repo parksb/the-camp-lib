@@ -1,6 +1,6 @@
 # THE CAMP Unofficial Library
 
-![npm downloads](https://img.shields.io/npm/dt/the-camp-lib?style=flat-square) ![npm version](https://img.shields.io/npm/v/the-camp-lib?style=flat-square) ![npm license](https://img.shields.io/npm/l/the-camp-lib?style=flat-square)
+[![npm downloads](https://img.shields.io/npm/dt/the-camp-lib?style=flat-square)](https://www.npmjs.com/package/the-camp-lib) [![npm version](https://img.shields.io/npm/v/the-camp-lib?style=flat-square)](https://www.npmjs.com/package/the-camp-lib) [![npm license](https://img.shields.io/npm/l/the-camp-lib?style=flat-square)](LICENSE)
 
 대국민 국군 소통 서비스 [더 캠프](http://www.thecamp.or.kr/)를 사이트 외부에서 이용하기 위해 만든 비공식 라이브러리입니다. 현재 인터넷 편지 발송을 중심으로 구현되어 있습니다.
 
@@ -22,9 +22,9 @@ async function main() {
     '박뫄뫄',
     '20011129',
     '20200829',
-    thecamp.SoldierClassName['예비군인/훈련병'],
-    thecamp.SoldierGroupName['육군'],
-    thecamp.SoldierUnitName['육군훈련소(00연대)'],
+    '예비군인/훈련병',
+    '육군',
+    '육군훈련소(00연대)',
     thecamp.SoldierRelationship.FRIEND,
   );
 
@@ -73,22 +73,22 @@ $ npm install
 * `missSoldierClassCd: SoldierClass` - 성분 코드
 * `grpCdNm: SoldierGroupName` - 군종
 * `grpCd: SoldierGroup` - 군종 코드
-* `name: string` - 이름 (e.g., `박뫄뫄`)
-* `birth: string` - 생년월일 (e.g., `20011129`)
-* `enterDate: string` - 입열 날짜 (e.g., `20200829`)
+* `name: string` - 이름 
+* `birth: string` - 생년월일 
+* `enterDate: string` - 입열 날짜 
 * `trainUnitCd: SoldierUnit` - 입영부대 코드
-* `trainUnitNm: SoldierUnitNm` - 입영부대 (e.g., `육군훈련소(25연대)`)
+* `trainUnitNm: SoldierUnitNm` - 입영부대 
 * `missSoldierRelationshipCd: SoldierRelationship` - 관계 코드
 * `traineeMgrSeq?: string` - 훈련병 식별 코드
 
 #### Constructor
 
-* `name: string` - 이름 (e.g., `박뫄뫄`)
-* `birth: string` - 생년월일 (e.g., `20011129`)
-* `enterDate: string` - 입영날짜 (e.g., `20200829`)
-* `className: SoldierClassName` - 성분 (e.g., `SoldierClassName['예비군인/훈련병']`)
-* `groupName: SoldierGroupName` - 군종 (e.g., `SoldierGroupName['육군']`)
-* `unitName: SoldierUnitName` - 입영부대 (e.g., `SoldierUnitName['육군훈련소(25연대)']`)
+* `name: string` - 이름 (e.g., `'박뫄뫄'`)
+* `birth: string` - 생년월일 (e.g., `'20011129'`)
+* `enterDate: string` - 입영날짜 (e.g., `'20200829'`)
+* `className: SoldierClassName` - 성분 (e.g., `'예비군인/훈련병'`)
+* `groupName: SoldierGroupName` - 군종 (e.g., `'육군'`)
+* `unitName: SoldierUnitName` - 입영부대 (e.g., `'28사단'`, `'육군훈련소(25연대)'`)
 * `relationship: SoldierRelationship` - 관계 (e.g., `SoldierRelationship.FRIEND`)
 
 ### `enum SoldierClass`
