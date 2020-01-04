@@ -18,9 +18,9 @@ const thecamp = require('the-camp-lib');
     name,
     birth,
     enterDate,
-    thecamp.SoldierClassName[className],
-    thecamp.SoldierGroupName[groupName],
-    thecamp.SoldierUnitName[unitName],
+    className,
+    groupName,
+    unitName,
     thecamp.SoldierRelationship.FRIEND,
   );
 

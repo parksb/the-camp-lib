@@ -8,6 +8,6 @@
   "license": "MIT",
   "dependencies": {
     "dotenv": "^8.1.0",
-    "the-camp-lib": "^2.0.1"
+    "the-camp-lib": "^2.1.0"
   }
 }
