@@ -9,7 +9,6 @@ import { addLog, buildRequestUrl } from '../utils';
  * @param soldier - 확인할 군인 정보
  */
 async function fetchSoldiers(cookies: Cookie, soldier: Soldier) {
-  const { name, birth, enterDate, trainUnitCd } = soldier;
   const options = {
     url: buildRequestUrl('main/cafeCreateCheckA.do'),
     method: 'POST',
@@ -19,10 +18,10 @@ async function fetchSoldiers(cookies: Cookie, soldier: Soldier) {
       Cookie: `iuid=${cookies.iuid};`,
     },
     form: {
-      name,
-      birth,
-      enterDate,
-      trainUnitCd,
+      name: soldier.getName(),
+      birth: soldier.getBirth(),
+      enterDate: soldier.getEnterDate(),
+      trainUnitCd: soldier.getTrainUnitCd(),
     },
   };
 
@@ -42,13 +41,11 @@ async function fetchSoldiers(cookies: Cookie, soldier: Soldier) {
     throw new Error('응답 값이 없습니다.');
   }
 
-  const result: Soldier[] = response.listResult.map((fetchedSoldier) => {
-    const { traineeMgrSeq, trainUnitEduSeq } = fetchedSoldier;
-    return {
-      ...soldier,
-      traineeMgrSeq,
-      trainUnitEduSeq,
-    };
+  const result: Soldier[] = response.listResult.map((fetchedSoldierInfo) => {
+    const { traineeMgrSeq } = fetchedSoldierInfo;
+    const clonedSoldier = soldier.clone();
+    clonedSoldier.setTraineeMgrSeq(traineeMgrSeq);
+    return clonedSoldier;
   });
 
   if (!result || result.length === 0) {

@@ -76,6 +76,45 @@ enum SoldierUnit {
   '육군훈련소(30연대)' = '20020192400',
 }
 
+enum SoldierUnitName {
+  '1사단' = '1사단',
+  '2사단' = '2사단',
+  '3사단' = '3사단',
+  '5사단' = '5사단',
+  '6사단' = '6사단',
+  '7사단' = '7사단',
+  '9사단' = '9사단',
+  '11사단' = '11사단',
+  '12사단' = '12사단',
+  '15사단' = '15사단',
+  '17사단' = '17사단',
+  '20사단' = '20사단',
+  '21사단' = '21사단',
+  '22사단' = '22사단',
+  '23사단' = '23사단',
+  '25사단' = '25사단',
+  '27사단' = '27사단',
+  '28사단' = '28사단',
+  '30사단' = '30사단',
+  '31사단' = '31사단',
+  '32사단' = '32사단',
+  '35사단' = '35사단',
+  '36사단' = '36사단',
+  '37사단' = '37사단',
+  '39사단' = '39사단',
+  '50사단' = '50사단',
+  '51사단' = '51사단',
+  '53사단' = '53사단',
+  '육군훈련소' = '육군훈련소',
+  '육군훈련소(23연대)' = '육군훈련소(23연대)',
+  '육군훈련소(25연대)' = '육군훈련소(25연대)',
+  '육군훈련소(26연대)' = '육군훈련소(26연대)',
+  '육군훈련소(27연대)' = '육군훈련소(27연대)',
+  '육군훈련소(28연대)' = '육군훈련소(28연대)',
+  '육군훈련소(29연대)' = '육군훈련소(29연대)',
+  '육군훈련소(30연대)' = '육군훈련소(30연대)',
+}
+
 /**
  * 관계 코드
  */
@@ -92,18 +131,91 @@ enum SoldierRelationship {
 /**
  * 군인 정보
  */
-interface Soldier {
-  missSoldierClassCdNm: SoldierClassName; // 성분
-  missSoldierClassCd: SoldierClass; // 성분 코드
-  grpCdNm: SoldierGroupName; // 군종
-  grpCd: SoldierGroup; // 군종 코드
-  name: string; // 이름
-  birth: string; // 생년월일 (YYYY-MM-DD)
-  enterDate: string; // 입열 날짜 (YYYY-MM-DD)
-  trainUnitCd: SoldierUnit; // 입영부대 코드
-  missSoldierRelationshipCd: SoldierRelationship; // 관계 코드
-  traineeMgrSeq?: string;
-  traineeUnitEduSeq?: string;
+class Soldier {
+  private missSoldierClassCdNm: SoldierClassName; // 성분
+  private missSoldierClassCd: SoldierClass; // 성분 코드
+  private grpCdNm: SoldierGroupName; // 군종
+  private grpCd: SoldierGroup; // 군종 코드
+  private name: string; // 이름
+  private birth: string; // 생년월일 (YYYY-MM-DD)
+  private enterDate: string; // 입열 날짜 (YYYY-MM-DD)
+  private trainUnitCd: SoldierUnit; // 입영부대 코드
+  private trainUnitNm: SoldierUnitName;
+  private missSoldierRelationshipCd: SoldierRelationship; // 관계 코드
+  private traineeMgrSeq?: string; // 훈련병 식별 코드
+
+  constructor(
+    name: string,
+    birth: string,
+    enterDate: string,
+    className: string,
+    groupName: string,
+    unitName: string,
+    relationship: SoldierRelationship,
+  ) {
+    this.name = name;
+    this.birth = birth;
+    this.enterDate = enterDate;
+    this.missSoldierClassCdNm = SoldierClassName[className];
+    this.missSoldierClassCd = SoldierClass[className];
+    this.grpCdNm = SoldierGroupName[groupName];
+    this.grpCd = SoldierGroup[groupName];
+    this.trainUnitNm = SoldierUnitName[unitName];
+    this.trainUnitCd = SoldierUnit[unitName];
+    this.missSoldierRelationshipCd = relationship;
+  }
+
+  public clone() {
+    return new Soldier(
+      this.name,
+      this.birth,
+      this.enterDate,
+      this.missSoldierClassCdNm,
+      this.grpCdNm,
+      this.trainUnitNm,
+      this.missSoldierRelationshipCd,
+    );
+  }
+
+  public getName() {
+    return this.name;
+  }
+
+  public getBirth() {
+    return this.birth;
+  }
+
+  public getEnterDate() {
+    return this.enterDate;
+  }
+
+  public getMissSoldierClassCdNm() {
+    return this.missSoldierClassCdNm;
+  }
+
+  public getGrpCdNm() {
+    return this.grpCdNm;
+  }
+
+  public getGrpCd() {
+    return this.grpCd;
+  }
+
+  public getMissSoldierClassCd() {
+    return this.missSoldierClassCd;
+  }
+
+  public getTraineeMgrSeq() {
+    return this.traineeMgrSeq;
+  }
+
+  public getTrainUnitCd() {
+    return this.trainUnitCd;
+  }
+
+  public setTraineeMgrSeq(traineeMgrSeq: string) {
+    this.traineeMgrSeq = traineeMgrSeq;
+  }
 }
 
-export { Soldier, SoldierClass, SoldierClassName, SoldierGroup, SoldierGroupName, SoldierUnit, SoldierRelationship };
+export { Soldier, SoldierClass, SoldierGroup, SoldierUnit, SoldierRelationship };

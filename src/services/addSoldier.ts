@@ -9,7 +9,6 @@ import { addLog, buildRequestUrl } from '../utils';
  * @param soldier - 추가할 군인 정보
  */
 async function addSoldier(cookies: Cookie, soldier: Soldier) {
-  const { missSoldierClassCdNm, grpCdNm, missSoldierClassCd, grpCd, name, birth, enterDate } = soldier;
   const options = {
     url: buildRequestUrl('missSoldier/insertDirectMissSoldierA.do'),
     method: 'POST',
@@ -19,13 +18,13 @@ async function addSoldier(cookies: Cookie, soldier: Soldier) {
       Cookie: `iuid=${cookies.iuid};`,
     },
     form: {
-      missSoldierClassCdNm,
-      grpCdNm,
-      missSoldierClassCd,
-      grpCd,
-      name,
-      birth,
-      enterDate,
+      missSoldierClassCdNm: soldier.getMissSoldierClassCdNm(),
+      grpCdNm: soldier.getGrpCdNm(),
+      missSoldierClassCd: soldier.getMissSoldierClassCd(),
+      grpCd: soldier.getGrpCd(),
+      name: soldier.getName(),
+      birth: soldier.getBirth(),
+      enterDate: soldier.getEnterDate(),
     },
   };
 

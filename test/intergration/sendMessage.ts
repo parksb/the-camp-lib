@@ -16,27 +16,13 @@ import * as models from '../../src/models';
   const enterDate = process.env.ENTER_DATE!;
   const birth = process.env.TRAINEE_BIRTH!;
 
-  const soldier: models.Soldier = {
-    name,
-    birth,
-    enterDate,
-    missSoldierClassCdNm: models.SoldierClassName[className],
-    missSoldierClassCd: models.SoldierClass[className],
-    grpCdNm: models.SoldierGroupName[groupName],
-    grpCd: models.SoldierGroup[groupName],
-    trainUnitCd: models.SoldierUnit[unitName],
-    missSoldierRelationshipCd: models.SoldierRelationship.FRIEND,
-  };
+  const soldier = new models.Soldier(name, birth, enterDate, className, groupName, unitName, models.SoldierRelationship.FRIEND);
 
   const cookies = await services.login(id, password);
   await services.addSoldier(cookies, soldier);
   const [trainee] = await services.fetchSoldiers(cookies, soldier);
 
-  const message: models.Message = {
-    sympathyLetterSubject: 'Test title',
-    sympathyLetterContent: 'Test content',
-    traineeMgrSeq: trainee.traineeMgrSeq,
-  };
+  const message = new models.Message('Test title', 'Test content', trainee.getTraineeMgrSeq()!);
 
   await services.sendMessage(cookies, trainee, message);
 })();

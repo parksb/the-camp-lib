@@ -10,11 +10,10 @@ import { buildRequestUrl, addLog } from '../utils';
  * @param message - 인터넷 편지 정보
  */
 async function sendMessage(cookies: Cookie, trainee: Soldier, message: Message) {
-  if (trainee.missSoldierClassCd !== SoldierClass['예비군인/훈련병']) {
+  if (trainee.getMissSoldierClassCd() !== SoldierClass['예비군인/훈련병']) {
     throw new Error('예비군인/훈련병에게만 편지를 보낼 수 있습니다.');
   }
 
-  const { traineeMgrSeq, sympathyLetterSubject, sympathyLetterContent } = message;
   const options = {
     uri: buildRequestUrl('consolLetter/insertConsolLetterA.do?'),
     method: 'POST',
@@ -24,9 +23,9 @@ async function sendMessage(cookies: Cookie, trainee: Soldier, message: Message) 
       Cookie: `iuid=${cookies.iuid};`,
     },
     form: {
-      traineeMgrSeq,
-      sympathyLetterContent,
-      sympathyLetterSubject,
+      traineeMgrSeq: message.getTraineeMgrSeq(),
+      sympathyLetterContent: message.getSympathyLetterContent(),
+      sympathyLetterSubject: message.getSympathyLetterSubject(),
       boardDiv: 'sympathyLetter',
       tempSaveYn: 'N',
     },
