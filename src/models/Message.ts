@@ -2,10 +2,9 @@
  * 인터넷 편지 정보
  */
 interface Message {
-  title: string; // 편지 제목
-  content: string; // 편지 내용
-  boardId?: string;
-  fileInfo?: any[];
+  sympathyLetterSubject: string; // 편지 제목
+  sympathyLetterContent: string; // 편지 내용
+  traineeMgrSeq: string;
 }
 
 export { Message };

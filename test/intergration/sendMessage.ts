@@ -32,9 +32,10 @@ import * as models from '../../src/models';
   await services.addSoldier(cookies, soldier);
   const [trainee] = await services.fetchSoldiers(cookies, soldier);
 
-  const message = {
-    title: 'Test title',
-    content: 'Test content',
+  const message: models.Message = {
+    sympathyLetterSubject: 'Test title',
+    sympathyLetterContent: 'Test content',
+    traineeMgrSeq: trainee.traineeMgrSeq,
   };
 
   await services.sendMessage(cookies, trainee, message);

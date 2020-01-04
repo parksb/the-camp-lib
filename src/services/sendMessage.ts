@@ -14,6 +14,7 @@ async function sendMessage(cookies: Cookie, trainee: Soldier, message: Message) 
     throw new Error('예비군인/훈련병에게만 편지를 보낼 수 있습니다.');
   }
 
+  const { traineeMgrSeq, sympathyLetterSubject, sympathyLetterContent } = message;
   const options = {
     uri: buildRequestUrl('consolLetter/insertConsolLetterA.do?'),
     method: 'POST',
@@ -23,11 +24,11 @@ async function sendMessage(cookies: Cookie, trainee: Soldier, message: Message) 
       Cookie: `iuid=${cookies.iuid};`,
     },
     form: {
+      traineeMgrSeq,
+      sympathyLetterContent,
+      sympathyLetterSubject,
       boardDiv: 'sympathyLetter',
       tempSaveYn: 'N',
-      traineeMgrSeq: trainee.traineeMgrSeq,
-      sympathyLetterContent: message.content,
-      sympathyLetterSubject: message.title,
     },
   };
 
