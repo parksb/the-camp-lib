@@ -1,7 +1,6 @@
-import * as request from 'request';
 import requestPromise from 'request-promise';
 
-import { Trainee, Message, Cookie } from '../models';
+import { Soldier, Message, Cookie, SoldierClass } from '../models';
 import { buildRequestUrl, addLog } from '../utils';
 
 /**
@@ -10,46 +9,45 @@ import { buildRequestUrl, addLog } from '../utils';
  * @param trainee - 훈련병 정보
  * @param message - 인터넷 편지 정보
  */
-async function sendMessage(cookies: Cookie, trainee: Trainee, message: Message) {
-  let response: request.Response | null = null;
+async function sendMessage(cookies: Cookie, trainee: Soldier, message: Message) {
+  if (trainee.getMissSoldierClassCd() !== SoldierClass['예비군인/훈련병']) {
+    throw new Error('예비군인/훈련병에게만 편지를 보낼 수 있습니다.');
+  }
+
   const options = {
-    uri: buildRequestUrl('message/letter/insert.do'),
+    uri: buildRequestUrl('consolLetter/insertConsolLetterA.do?'),
     method: 'POST',
     json: true,
-    body: {
-      unit_code: trainee.unitCode,
-      group_id: trainee.groupId,
-      relationship: trainee.relationship,
-      trainee_name: trainee.traineeName,
-      title: message.title,
-      content: message.content,
-      boardId: message.boardId || '',
-      fileInfo: message.fileInfo || [],
-    },
     headers: {
-      Cookie: `${cookies.jsessionid} ${cookies.scouter}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+      Cookie: `iuid=${cookies.iuid};`,
+    },
+    form: {
+      traineeMgrSeq: message.getTraineeMgrSeq(),
+      sympathyLetterContent: message.getSympathyLetterContent(),
+      sympathyLetterSubject: message.getSympathyLetterSubject(),
+      boardDiv: 'sympathyLetter',
+      tempSaveYn: 'N',
     },
   };
 
-  await requestPromise(options, (err, res, body) => {
+  const response = await requestPromise(options, (err, res, body) => {
     if (err) {
       throw new Error(err);
     }
 
     addLog('sendMessage', `${res.statusCode} ${res.statusMessage}`);
 
-    if (res.statusCode === 200 && body.resultCode !== 200) {
-      throw new Error(body.resultMessage || 'Unknown error.');
+    if (res.statusCode === 200 && body.resultCd !== '0000') {
+      throw new Error(body.resultMsg || '알 수 없는 에러.');
     }
-
-    response = res;
   });
 
   if (!response) {
-    throw new Error('Response is null.');
+    throw new Error('응답 값이 없습니다.');
   }
 
-  return response as request.Response;
+  return true;
 }
 
 export { sendMessage };

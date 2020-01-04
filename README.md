@@ -18,22 +18,21 @@ const thecamp = require('the-camp-lib');
 import * as thecamp from 'the-camp-lib';
 
 async function main() {
+  const soldier = new thecamp.Soldier(
+    '박뫄뫄',
+    '20011129',
+    '20200829',
+    thecamp.SoldierClassName['예비군인/훈련병'],
+    thecamp.SoldierGroupName['육군'],
+    thecamp.SoldierUnitName['육군훈련소(00연대)'],
+    thecamp.SoldierRelationship.FRIEND,
+  );
+
   const cookies = await thecamp.login('user@email.com', 'password');
-  const [group] = await thecamp.fetchGroups(cookies, '00연대', '20190829');
+  await thecamp.addSoldier(cookies, soldier);
+  const [trainee] = await thecamp.fetchSoldiers(cookies, soldier);
 
-  const trainee = {
-    traineeName: '박뫄뫄',
-    birth: '19981129',
-    unitCode: group.unitCode,
-    groupId: group.groupId,
-    relationship: thecamp.Relationship.FRIEND,
-  };
-
-  const message = {
-    title: '제목',
-    content: '내용',
-  };
-
+  const message = new models.Message('Title', 'Content', trainee.getTraineeMgrSeq()!);
   await thecamp.sendMessage(cookies, trainee, message);
 }
 ```
@@ -64,55 +63,82 @@ $ npm install
 
 세션 식별을 위한 쿠키.
 
-* `scouter: stirng`
-* `jsessionid: string`
+* `iuid: string`
 
-### `interface Trainee`
+### `class Soldier`
 
-훈련병 정보.
+군인 정보.
 
-* `unitCode: string` - 훈련병이 소속된 연대/사단 식별 코드
-* `groupId: string` - 훈련병이 소속된 카페 식별 코드
-* `traineeName: string` - 훈련병 이름 (ex. `박뫄뫄`)
-* `birth: number` - 훈련병 생년 월일 (ex. `19981129`)
-* `relationship: Relationship` - 훈련병과의 관계
+* `missSoldierClassCdNm: SoldierClassName` - 성분
+* `missSoldierClassCd: SoldierClass` - 성분 코드
+* `grpCdNm: SoldierGroupName` - 군종
+* `grpCd: SoldierGroup` - 군종 코드
+* `name: string` - 이름 (e.g., `박뫄뫄`)
+* `birth: string` - 생년월일 (e.g., `20011129`)
+* `enterDate: string` - 입열 날짜 (e.g., `20200829`)
+* `trainUnitCd: SoldierUnit` - 입영부대 코드
+* `trainUnitNm: SoldierUnitNm` - 입영부대 (e.g., `육군훈련소(25연대)`)
+* `missSoldierRelationshipCd: SoldierRelationship` - 관계 코드
+* `traineeMgrSeq?: string` - 훈련병 식별 코드
 
-### `enum Relationship`
+#### Constructor
 
-훈련병과의 관계.
+* `name: string` - 이름 (e.g., `박뫄뫄`)
+* `birth: string` - 생년월일 (e.g., `20011129`)
+* `enterDate: string` - 입영날짜 (e.g., `20200829`)
+* `className: SoldierClassName` - 성분 (e.g., `SoldierClassName['예비군인/훈련병']`)
+* `groupName: SoldierGroupName` - 군종 (e.g., `SoldierGroupName['육군']`)
+* `unitName: SoldierUnitName` - 입영부대 (e.g., `SoldierUnitName['육군훈련소(25연대)']`)
+* `relationship: SoldierRelationship` - 관계 (e.g., `SoldierRelationship.FRIEND`)
 
-* `MOTHER = '어머니'`
-* `FATHER = '아버지'`
-* `SPOUSE = '배우자'`
-* `GRANDPARENTS = '조부모'`
-* `SIBLING = '형제/남매'`
-* `FRIEND = '친구'`
-* `LOVER = '애인'`
-* `RELATIVE = '친척'`
+### `enum SoldierClass`
 
-### `interface Message`
+성분 코드.
+
+* `'예비군인/훈련병' = '0000490001'`
+* `'병사' = '0000490002'`
+* `'장교' = '0000490003'`
+* `'부사관' = '0000490004'`
+* `'군무원' = '0000490005'`
+
+> 인터넷 편지는 `예비군인/훈련병`에게만 발송할 수 있습니다.
+
+### `enum SoldierGroup`
+
+군종 코드.
+
+* `'육군' = '0000010001'`
+* `'해군' = '0000010002'`
+* `'공군' = '0000010003'`
+* `'해병대' = '0000010004'`
+
+> 인터넷 편지는 `육군`에게만 발송할 수 있습니다.
+
+### `enum SoldierRelationship`
+
+관계 코드.
+
+* `PARENT = '0000420001'` - 부모
+* `SPOUSE = '0000420003'` - 배우자
+* `SIBLING = '0000420002'` - 형제/자매
+* `FRIEND = '0000420006'` - 친구/지인
+* `LOVER = '0000420005'` - 애인
+* `RELATIVE = '0000420004'` - 친척
+* `FAN = '0000420007'` - 팬
+
+### `class Message`
 
 인터넷 편지 정보.
 
-* `title: string` - 편지 제목
-* `content: string` - 편지 내용 (2000자 이하)
-* `boardId?: string`
-* `fileInfo?: any[]` - 첨부 파일 정보 (구현 예정)
+* `sympathyLetterSubject: string` - 편지 제목
+* `sympathyLetterContent: string` - 편지 내용 (1500자 이하)
+* `traineeMgrSeq: string` - 훈련병 식별 코드
 
-### `interface Group`
+#### Constructor
 
-가입 카페 정보.
-
-* `unitName: string` - 연대/사단 이름 (ex. `00연대`, `00사단`) 
-* `fullName: string` - 카페 전체 이름 (ex. `00연대 0교육대 00중대`)
-* `enterDate: string` - 훈련병 입소 날짜 (ex. `20190829`)
-* `groupId: string` - 카페 식별 코드
-* `groupName: string` - 카페 이름 (ex. `0교육대 00중대`)
-* `groupImage: string` - 카페 대표 이미지
-* `accessDate: string` - 요청 날짜
-* `unitCode: string` - 연대/사단 식별 코드
-* `unitType: number` - 육군훈련소(`1`)/사단신교대(`2`) 여부
-* `grade: number`
+* `sympathyLetterSubject: string` - 편지 제목 (e.g., `'Title'`)
+* `sympathyLetterContent: string` - 편지 내용 (e.g., `'Content'`, `'<i>Content</i>'`)
+* `traineeMgrSeq: string` - 훈련병 식별 코드 (e.g., `soldier.getTraineeMgrSeq()!`)
 
 ## Services
 
@@ -126,27 +152,36 @@ $ npm install
 * **Return value**
   * `Promise<Cookie>` - 세션 식별을 위한 쿠키
 
-### `fetchGroups(cookies: Cookie, unitName?: string, enterDate?: string)`
+### `addSoldier(cookies: Cookie, soldier: Soldier)`
 
-가입 카페 정보를 가져온다.
+계정에 군인을 추가한다.
 
 * **Parameters**
   * `cookies: Cookie` - 세션 식별을 위한 쿠키
-  * `unitName?: string (Optional)` - 훈련병이 소속된 연대/사단 이름 (ex. `00연대`, `00사단`)
-  * `enterDate?: string (Optional)` - 훈련병 입소 날짜 (ex. `20190829`)
+  * `soldier: Soldier` - 군인 정보
 * **Retrun value**
-  * `Promise<Group[]>` - 가입한 카페 목록. `unitName` 또는 `enterDate`가 주어지면 해당 훈련병이 소속된 카페만 `Group[]` 타입으로 반환한다.
+  * `Promise<boolean>` - 추가에 성공하거나, 이미 해당 군인이 존재하면 `true`를 반환한다.
 
-### `sendMessage(cookies: Cookie, trainee: Trainee, message: Message)`
+### `fetchSoldier(cookies: Cookie, soldier: Soldier)`
+
+군인 정보를 가져온다.
+
+* **Parameters**
+  * `cookies: Cookie` - 세션 식별을 위한 쿠키
+  * `soldier: Soldier` - 군인 정보
+* **Retrun value**
+  * `Promise<Soldier[]>` - 계정에 추가한 군인 목록 중 매개변수로 전달한 군인과 이름, 생일, 입영 날짜, 입영 부대 코드가 일치하는 `Soldier` 리스트를 반환한다.
+
+### `sendMessage(cookies: Cookie, trainee: Soldier, message: Message)`
 
 인터넷 편지를 전송한다. 
 
 * **Parameters**
   * `cookies: Cookie` - 세션 식별을 위한 쿠키
   * `trainee: Trainee` - 훈련병 정보
-  * `message: Message` - 인터넷 편지 정보. `message.boardId` 또는 `message.fileInfo`가 주어지지 않으면 각각 빈 문자열과 빈 배열을 할당한다. 
+  * `message: Message` - 인터넷 편지 정보
 * **Return value**
-  * `Promise<request.Response>` - 요청에 대한 HTTP 응답
+  * `Promise<boolean>` - 전송에 성공하면 `true`를 반환한다.
 
 # Examples
 
