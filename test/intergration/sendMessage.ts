@@ -16,7 +16,15 @@ import * as models from '../../src/models';
   const enterDate = process.env.ENTER_DATE!;
   const birth = process.env.TRAINEE_BIRTH!;
 
-  const soldier = new models.Soldier(name, birth, enterDate, className, groupName, unitName, models.SoldierRelationship.FRIEND);
+  const soldier = new models.Soldier(
+    name,
+    birth,
+    enterDate,
+    models.SoldierClassName[className],
+    models.SoldierGroupName[groupName],
+    models.SoldierUnitName[unitName],
+    models.SoldierRelationship.FRIEND,
+  );
 
   const cookies = await services.login(id, password);
   await services.addSoldier(cookies, soldier);

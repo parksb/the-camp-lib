@@ -137,10 +137,10 @@ class Soldier {
   private grpCdNm: SoldierGroupName; // 군종
   private grpCd: SoldierGroup; // 군종 코드
   private name: string; // 이름
-  private birth: string; // 생년월일 (YYYY-MM-DD)
-  private enterDate: string; // 입열 날짜 (YYYY-MM-DD)
+  private birth: string; // 생년월일 (YYYYMMDD)
+  private enterDate: string; // 입열 날짜 (YYYYMMDD)
+  private trainUnitCdNm: SoldierUnitName; // 입영부대
   private trainUnitCd: SoldierUnit; // 입영부대 코드
-  private trainUnitNm: SoldierUnitName;
   private missSoldierRelationshipCd: SoldierRelationship; // 관계 코드
   private traineeMgrSeq?: string; // 훈련병 식별 코드
 
@@ -148,9 +148,9 @@ class Soldier {
     name: string,
     birth: string,
     enterDate: string,
-    className: string,
-    groupName: string,
-    unitName: string,
+    className: SoldierClassName,
+    groupName: SoldierGroupName,
+    unitName: SoldierUnitName,
     relationship: SoldierRelationship,
   ) {
     this.name = name;
@@ -160,7 +160,7 @@ class Soldier {
     this.missSoldierClassCd = SoldierClass[className];
     this.grpCdNm = SoldierGroupName[groupName];
     this.grpCd = SoldierGroup[groupName];
-    this.trainUnitNm = SoldierUnitName[unitName];
+    this.trainUnitCdNm = SoldierUnitName[unitName];
     this.trainUnitCd = SoldierUnit[unitName];
     this.missSoldierRelationshipCd = relationship;
   }
@@ -172,7 +172,7 @@ class Soldier {
       this.enterDate,
       this.missSoldierClassCdNm,
       this.grpCdNm,
-      this.trainUnitNm,
+      this.trainUnitCdNm,
       this.missSoldierRelationshipCd,
     );
   }
@@ -218,4 +218,4 @@ class Soldier {
   }
 }
 
-export { Soldier, SoldierClass, SoldierGroup, SoldierUnit, SoldierRelationship };
+export { Soldier, SoldierClass, SoldierClassName, SoldierGroup, SoldierGroupName, SoldierUnit, SoldierUnitName, SoldierRelationship };
