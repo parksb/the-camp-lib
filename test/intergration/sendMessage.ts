@@ -9,21 +9,28 @@ import * as models from '../../src/models';
   const id = process.env.USER_ID!;
   const password = process.env.USER_PWD!;
 
-  const traineeName = process.env.TRAINEE_NAME!;
+  const name = process.env.TRAINEE_NAME!;
+  const className = process.env.CLASS_NAME!;
+  const groupName = process.env.GROUP_NAME!;
   const unitName = process.env.UNIT_NAME!;
   const enterDate = process.env.ENTER_DATE!;
-  const birth = Number(process.env.TRAINEE_BIRTH!);
+  const birth = process.env.TRAINEE_BIRTH!;
+
+  const soldier: models.Soldier = {
+    name,
+    birth,
+    enterDate,
+    missSoldierClassCdNm: models.SoldierClassName[className],
+    missSoldierClassCd: models.SoldierClass[className],
+    grpCdNm: models.SoldierGroupName[groupName],
+    grpCd: models.SoldierGroup[groupName],
+    trainUnitCd: models.SoldierUnit[unitName],
+    missSoldierRelationshipCd: models.SoldierRelationship.FRIEND,
+  };
 
   const cookies = await services.login(id, password);
-  const [group] = await services.fetchGroups(cookies, unitName, enterDate);
-
-  const trainee = {
-    birth,
-    traineeName,
-    unitCode: group.unitCode,
-    groupId: group.groupId,
-    relationship: models.Relationship.FRIEND,
-  };
+  await services.addSoldier(cookies, soldier);
+  const [trainee] = await services.fetchSoldiers(cookies, soldier);
 
   const message = {
     title: 'Test title',
