@@ -1,6 +1,6 @@
 # THE CAMP Unofficial Library
 
-[![npm downloads](https://img.shields.io/npm/dt/the-camp-lib?style=flat-square)](https://www.npmjs.com/package/the-camp-lib) [![npm version](https://img.shields.io/npm/v/the-camp-lib?style=flat-square)](https://www.npmjs.com/package/the-camp-lib) [![npm license](https://img.shields.io/npm/l/the-camp-lib?style=flat-square)](LICENSE)
+[![npm downloads](https://img.shields.io/npm/dt/the-camp-lib?style=flat-square)](https://www.npmjs.com/package/the-camp-lib) [![npm version](https://img.shields.io/npm/v/the-camp-lib?style=flat-square)](https://www.npmjs.com/package/the-camp-lib) [![health check](https://img.shields.io/github/workflow/status/ParkSB/the-camp-lib/HealthCheck/master?label=health%20check&style=flat-square)](https://github.com/ParkSB/the-camp-lib/actions?query=workflow%3A"HealthCheck") [![npm license](https://img.shields.io/npm/l/the-camp-lib?style=flat-square)](LICENSE)
 
 대국민 국군 소통 서비스 [더 캠프](http://www.thecamp.or.kr/)를 사이트 외부에서 이용하기 위해 만든 비공식 라이브러리입니다. 현재 인터넷 편지 발송을 중심으로 구현되어 있습니다.
 
