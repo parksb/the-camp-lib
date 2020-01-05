@@ -9,7 +9,9 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test": "mocha -r ts-node/register/transpile-only ./test/**/*.test.ts",
+    "test:healthcheck": "mocha -r ts-node/register/transpile-only ./test/**/healthCheck.test.ts"
   },
   "author": "ParkSB <parkgds@gmail.com> (https://parksb.github.io/)",
   "license": "MIT",
@@ -22,11 +24,18 @@
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
+    "@types/chai": "^4.2.7",
     "@types/dotenv": "^6.1.1",
     "@types/lodash": "^4.14.137",
+    "@types/mocha": "^5.2.7",
     "@types/node": "^12.7.2",
     "@types/request": "^2.48.2",
     "@types/request-promise": "^4.1.44",
+    "@types/sinon": "^7.5.1",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2",
+    "sinon": "^8.0.2",
+    "ts-node": "^8.5.4",
     "tslint": "^5.19.0",
     "tslint-config-airbnb": "^5.11.1",
     "typescript": "^3.5.3"

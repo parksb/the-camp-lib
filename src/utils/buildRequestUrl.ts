@@ -3,7 +3,7 @@
  * @param resources - 요청할 리소스
  */
 function buildRequestUrl(resources: string) {
-  const baseUrl = 'https://www.thecamp.or.kr/';
+  const baseUrl = 'https://www.thecamp.or.kr';
   return `${baseUrl}/${resources}`;
 }
 
