@@ -15,7 +15,7 @@ const options = (resources: string) => {
 describe('Health check', () => {
   context('addSoldier', () => {
     it('HTTP Status Code: 200', async () => {
-      let code: number;
+      let code: number = 0;
       await requestPromise(options('missSoldier/insertDirectMissSoldierA.do'), (err, res) => {
         code = res.statusCode;
       });
@@ -25,7 +25,7 @@ describe('Health check', () => {
 
   context('fetchSoldier', () => {
     it('HTTP Status Code: 200', async () => {
-      let code: number;
+      let code: number = 0;
       await requestPromise(options('main/cafeCreateCheckA.do'), (err, res) => {
         code = res.statusCode;
       });
@@ -35,7 +35,7 @@ describe('Health check', () => {
 
   context('login', () => {
     it('HTTP Status Code: 200', async () => {
-      let code: number;
+      let code: number = 0;
       await requestPromise(options('login/loginA.do'), (err, res) => {
         code = res.statusCode;
       });
@@ -45,7 +45,7 @@ describe('Health check', () => {
 
   context('sendMessage', () => {
     it('HTTP Status Code: 200', async () => {
-      let code: number;
+      let code: number = 0;
       await requestPromise(options('main/cafeCreateCheckA.do'), (err, res) => {
         code = res.statusCode;
       });
