@@ -2,7 +2,7 @@
 
 [![npm downloads](https://img.shields.io/npm/dt/the-camp-lib?style=flat-square)](https://www.npmjs.com/package/the-camp-lib) [![npm version](https://img.shields.io/npm/v/the-camp-lib?style=flat-square)](https://www.npmjs.com/package/the-camp-lib) [![health check](https://img.shields.io/github/workflow/status/ParkSB/the-camp-lib/HealthCheck/master?label=health%20check&style=flat-square)](https://github.com/ParkSB/the-camp-lib/actions?query=workflow%3A"HealthCheck") [![npm license](https://img.shields.io/npm/l/the-camp-lib?style=flat-square)](LICENSE)
 
-대국민 국군 소통 서비스 [더 캠프](http://www.thecamp.or.kr/)를 사이트 외부에서 이용하기 위해 만든 비공식 라이브러리입니다. 현재 인터넷 편지 발송을 중심으로 구현되어 있습니다.
+대국민 국군 소통 서비스 [더 캠프](http://www.thecamp.or.kr/)를 사이트 외부에서 이용하기 위해 만든 비공식 라이브러리입니다. 현재 인터넷 편지 발송을 중심으로 구현되어 있습니다. 매주 월요일 0시 [API의 유효성을 체크](https://github.com/ParkSB/the-camp-lib/actions?query=workflow%3A%22HealthCheck%22)합니다. `passing` 상태가 아니라면 API가 동작하지 않는다는 의미이니 참고해주세요.
 
 # Installation
 
@@ -49,9 +49,9 @@ $ cd the-camp-lib
 $ npm install
 ```
 
-모든 코드는 src 디렉토리 아래에 있습니다. 차후 유닛 테스트 환경을 구축할 예정입니다. 그 전까지는 test/interaration 디렉토리 하위에 테스트할 코드를 작성하고 `ts-node filename.ts`를 실행하는 방식으로 테스트 합니다.
+모든 코드는 `src` 디렉토리 아래에 있습니다. `npm test` 명령으로 유닛 테스트를 실행할 수 있고, `npm run test:healthcheck` 명령으로 API 유효성을 체크할 수 있습니다. 또한 `test/feature` 디렉토리 하위에 테스트할 코드를 작성한 뒤 `ts-node filename.ts`를 실행하는 방식으로 실제 동작을 테스트할 수 있습니다.
 
-쉘에서 `npm run build`를 실행하면 dist 디렉토리에 빌드된 파일이 만들어집니다. test 디렉토리 하위에 예시 디렉토리를 만든 뒤 쉘에서 `npm init`, `npm install ../../ --save`를 실행하면 해당 디렉토리에 패키지가 설치됩니다. 이렇게 하면 로컬에서 배포 버전을 테스트할 수 있습니다.
+쉘에서 `npm run build`를 실행하면 `dist` 디렉토리에 빌드된 파일이 만들어집니다. `test` 디렉토리 하위에 예시 디렉토리를 만든 뒤 `npm init`, `npm install ../../ --save`를 실행하면 해당 디렉토리에 패키지가 설치됩니다. 이렇게 하면 로컬에서 배포 버전을 테스트할 수 있습니다.
 
 # Specifications
 
