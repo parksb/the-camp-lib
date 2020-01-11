@@ -49,7 +49,7 @@ $ cd the-camp-lib
 $ npm install
 ```
 
-모든 코드는 `src` 디렉토리 아래에 있습니다. `npm test` 명령으로 유닛 테스트를 실행할 수 있고, `npm run test:healthcheck` 명령으로 API 유효성을 체크할 수 있습니다. 또한 `test/feature` 디렉토리 하위에 테스트할 코드를 작성한 뒤 `ts-node filename.ts`를 실행하는 방식으로 실제 동작을 테스트할 수 있습니다.
+모든 코드는 `src` 디렉토리 아래에 있습니다. `npm test` 명령으로 API 유효성을 체크하고 유닛 테스트를 실행할 수 있습니다. `npm run test:unit` 명령과 `npm run test:health-check` 명령으로 유닛 테스트와 API 체크를 따로 실행할 수도 있습니다. 또한 `test/feature` 디렉토리 하위에 테스트할 코드를 작성한 뒤 `ts-node filename.ts`를 실행하는 방식으로 실제 동작을 테스트할 수 있습니다.
 
 쉘에서 `npm run build`를 실행하면 `dist` 디렉토리에 빌드된 파일이 만들어집니다. `test` 디렉토리 하위에 예시 디렉토리를 만든 뒤 `npm init`, `npm install ../../ --save`를 실행하면 해당 디렉토리에 패키지가 설치됩니다. 이렇게 하면 로컬에서 배포 버전을 테스트할 수 있습니다.
 

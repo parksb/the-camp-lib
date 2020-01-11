@@ -10,8 +10,9 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "test": "mocha -r ts-node/register/transpile-only ./test/**/*.test.ts",
-    "test:healthcheck": "mocha -r ts-node/register/transpile-only ./test/**/healthCheck.test.ts"
+    "test": "npm run test:health-check && npm run test:unit",
+    "test:unit": "mocha -r ts-node/register/transpile-only ./test/unit/**/*.test.ts",
+    "test:health-check": "mocha -r ts-node/register/transpile-only ./test/health-check/*.test.ts"
   },
   "author": "ParkSB <parkgds@gmail.com> (https://parksb.github.io/)",
   "license": "MIT",

@@ -22,21 +22,21 @@ const options = (userId?: string, userPwd?: string) => {
 
 describe('login', () => {
   context('존재하지 않는 계정으로 로그인하는 경우', () => {
-    it('resultCd: 9000', async () => {
+    it('resultCd 9000 응답이 온다', async () => {
       const response = await requestPromise(options('user@email.com', 'password'));
       expect(response.resultCd).to.be.equal('9000');
     });
   });
 
   context('이메일을 입력하지 않는 경우', () => {
-    it('resultCd: 9000', async () => {
+    it('resultCd 9000 응답이 온다', async () => {
       const response = await requestPromise(options(undefined, 'password'));
       expect(response.resultCd).to.be.equal('9006');
     });
   });
 
   context('비밀번호를 입력하지 않는 경우', () => {
-    it('resultCd: 9000', async () => {
+    it('resultCd 9000 응답이 온다', async () => {
       const response = await requestPromise(options('user@email.com'));
       expect(response.resultCd).to.be.equal('9000');
     });
