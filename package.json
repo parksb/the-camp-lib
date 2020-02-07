@@ -1,6 +1,6 @@
 {
   "name": "the-camp-lib",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "대국민 국군 소통 서비스 더 캠프 비공식 라이브러리",
   "homepage": "https://github.com/ParkSB/the-camp-lib/",
   "repository": {
@@ -12,7 +12,8 @@
     "build": "tsc",
     "test": "npm run test:health-check && npm run test:unit",
     "test:unit": "mocha -r ts-node/register/transpile-only ./test/unit/**/*.test.ts",
-    "test:health-check": "mocha -r ts-node/register/transpile-only ./test/health-check/*.test.ts"
+    "test:health-check": "mocha -r ts-node/register/transpile-only ./test/health-check/*.test.ts",
+    "publish": "rm -rf dist && npm run build && npm publish"
   },
   "author": "ParkSB <parkgds@gmail.com> (https://parksb.github.io/)",
   "license": "MIT",
