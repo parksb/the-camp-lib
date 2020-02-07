@@ -20,7 +20,7 @@ async function sendMessage(cookies: Cookie, trainee: Soldier, message: Message) 
     json: true,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
-      Cookie: `iuid=${cookies.iuid};`,
+      Cookie: `${cookies.iuid}; ${cookies.token}`,
     },
     form: {
       traineeMgrSeq: message.getTraineeMgrSeq(),

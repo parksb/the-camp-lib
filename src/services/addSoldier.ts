@@ -15,7 +15,7 @@ async function addSoldier(cookies: Cookie, soldier: Soldier) {
     json: true,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
-      Cookie: `iuid=${cookies.iuid};`,
+      Cookie: `${cookies.iuid}; ${cookies.token}`,
     },
     form: {
       missSoldierClassCdNm: soldier.getMissSoldierClassCdNm(),

@@ -15,13 +15,12 @@ async function fetchSoldiers(cookies: Cookie, soldier: Soldier) {
     json: true,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
-      Cookie: `iuid=${cookies.iuid};`,
+      Cookie: `${cookies.iuid}; ${cookies.token}`,
     },
     form: {
       name: soldier.getName(),
       birth: soldier.getBirth(),
       enterDate: soldier.getEnterDate(),
-      trainUnitCd: soldier.getTrainUnitCd(),
     },
   };
 

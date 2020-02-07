@@ -3,6 +3,7 @@
  */
 interface Cookie {
   iuid: string;
+  token: string;
 }
 
 export { Cookie };
