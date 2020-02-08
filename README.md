@@ -34,24 +34,11 @@ async function main() {
   await client.addSoldier(soldier);
  
   const [trainee] = await client.fetchSoldiers(soldier);
-  const message = new models.Message('Test title', 'Test content', trainee);
+  const message = new thecamp.Message('Test title', 'Test content', trainee);
  
   await client.sendMessage(soldier, message);
-```
-
-원한다면 추상화되지 않은 서비스 함수를 직접 호출할 수도 있습니다.
-
-```js
-  const cookies = await thecamp.login('user@email.com', 'password');
-  await thecamp.addSoldier(cookies, soldier);
-  const [trainee] = await thecamp.fetchSoldiers(cookies, soldier);
-
-  const message = new models.Message('Title', 'Content', trainee);
-  await thecamp.sendMessage(cookies, trainee, message);
 }
 ```
-
-> 더 캠프는 로그인할 때 생성한 쿠키를 기반으로 세션을 식별합니다. 로그인이 필요한 서비스를 이용하려면 HTTP 요청 헤더에 로그인 시 생성된 쿠키를 포함해야 합니다.
 
 # Development
 
