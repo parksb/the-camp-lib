@@ -28,11 +28,25 @@ async function main() {
     thecamp.SoldierRelationship.FRIEND,
   );
 
+  const client = new thecamp.Client();
+  
+  await client.login('user@email.com', 'password');
+  await client.addSoldier(soldier);
+ 
+  const [trainee] = await client.fetchSoldiers(soldier);
+  const message = new models.Message('Test title', 'Test content', trainee);
+ 
+  await client.sendMessage(soldier, message);
+```
+
+원한다면 추상화되지 않은 서비스 함수를 직접 호출할 수도 있습니다.
+
+```js
   const cookies = await thecamp.login('user@email.com', 'password');
   await thecamp.addSoldier(cookies, soldier);
   const [trainee] = await thecamp.fetchSoldiers(cookies, soldier);
 
-  const message = new models.Message('Title', 'Content', trainee.getTraineeMgrSeq()!);
+  const message = new models.Message('Title', 'Content', trainee);
   await thecamp.sendMessage(cookies, trainee, message);
 }
 ```
@@ -159,7 +173,7 @@ $ npm install
 * **Parameters**
   * `cookies: Cookie` - 세션 식별을 위한 쿠키
   * `soldier: Soldier` - 군인 정보
-* **Retrun value**
+* **Return value**
   * `Promise<boolean>` - 추가에 성공하거나, 이미 해당 군인이 존재하면 `true`를 반환한다.
 
 ### `fetchSoldier(cookies: Cookie, soldier: Soldier)`
@@ -169,7 +183,7 @@ $ npm install
 * **Parameters**
   * `cookies: Cookie` - 세션 식별을 위한 쿠키
   * `soldier: Soldier` - 군인 정보
-* **Retrun value**
+* **Return value**
   * `Promise<Soldier[]>` - 계정에 추가한 군인 목록 중 매개변수로 전달한 군인과 이름, 생일, 입영 날짜, 입영 부대 코드가 일치하는 `Soldier` 리스트를 반환한다.
 
 ### `sendMessage(cookies: Cookie, trainee: Soldier, message: Message)`
