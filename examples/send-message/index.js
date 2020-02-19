@@ -28,7 +28,7 @@ const thecamp = require('the-camp-lib');
   await thecamp.addSoldier(cookies, soldier);
   const [trainee] = await thecamp.fetchSoldiers(cookies, soldier);
 
-  const message = new thecamp.Message('Title', 'Content', trainee.getTraineeMgrSeq());
+  const message = new thecamp.Message('Title', 'Content', trainee);
 
   await thecamp.sendMessage(cookies, trainee, message);
 })();
