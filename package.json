@@ -18,7 +18,6 @@
   "author": "ParkSB <parkgds@gmail.com> (https://parksb.github.io/)",
   "license": "MIT",
   "dependencies": {
-    "lodash": "^4.17.15",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
   },
@@ -27,7 +26,6 @@
     "@babel/preset-env": "^7.5.5",
     "@types/chai": "^4.2.7",
     "@types/dotenv": "^6.1.1",
-    "@types/lodash": "^4.14.137",
     "@types/mocha": "^5.2.7",
     "@types/node": "^12.7.2",
     "@types/request": "^2.48.2",

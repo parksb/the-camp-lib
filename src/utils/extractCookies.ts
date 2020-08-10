@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { Cookie } from '../models';
 
 /**
@@ -6,7 +5,7 @@ import { Cookie } from '../models';
  * @param cookies - 헤더의 쿠키 값
  */
 function extractCookies(cookies: string[]): Cookie {
-  if (_.isEmpty(cookies)) {
+  if (cookies.length === 0) {
     throw new Error('The cookie values in the header are empty.');
   }
 
