@@ -18,7 +18,6 @@
   "author": "ParkSB <parkgds@gmail.com> (https://parksb.github.io/)",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^8.1.0",
     "lodash": "^4.17.15",
     "request": "^2.88.0",
     "request-promise": "^4.2.4"
@@ -35,6 +34,7 @@
     "@types/request-promise": "^4.1.44",
     "@types/sinon": "^7.5.1",
     "chai": "^4.2.0",
+    "dotenv": "^8.1.0",
     "mocha": "^6.2.2",
     "sinon": "^8.0.2",
     "ts-node": "^8.5.4",
