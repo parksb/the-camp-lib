@@ -186,8 +186,12 @@ $ npm install
 
 # Examples
 
-* [send-message](examples/send-message): 인터넷 편지 전송 예시
-* [daily-news-for-trainee](https://github.com/ParkSB/daily-news-for-trainee): 뉴스 발송 프로젝트
+* 인터넷 편지 전송 예시: [send-message](examples/send-message)
+* 뉴스 발송 프로젝트: [daily-news-for-trainee](https://github.com/ParkSB/daily-news-for-trainee)
+
+# Other implementations
+
+* Python: [lewisleedev/thecampy](https://github.com/lewisleedev/thecampy)
 
 # License
 
