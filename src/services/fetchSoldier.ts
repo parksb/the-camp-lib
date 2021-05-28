@@ -21,6 +21,8 @@ async function fetchSoldiers(cookies: Cookie, soldier: Soldier) {
       name: soldier.getName(),
       birth: soldier.getBirth(),
       enterDate: soldier.getEnterDate(),
+      trainUnitCd: soldier.getTrainUnitCd(),
+      grpCd: soldier.getGrpCd(),
     },
   };
 
