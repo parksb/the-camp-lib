@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export interface RequestOption {
-  readonly method: "GET" | "POST" | "PUT";
+  readonly method: "GET" | "POST";
   readonly url: string;
   readonly headers?: any;
   readonly data?: any;
