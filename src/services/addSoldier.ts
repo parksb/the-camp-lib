@@ -1,7 +1,5 @@
-import requestPromise from 'request-promise';
-
 import { Cookie, Soldier } from '../models';
-import { addLog, buildRequestUrl } from '../utils';
+import { addLog, buildRequestUrl, request, RequestOption } from '../utils';
 
 /**
  * 군인을 추가한다.
@@ -9,15 +7,14 @@ import { addLog, buildRequestUrl } from '../utils';
  * @param soldier - 추가할 군인 정보
  */
 async function addSoldier(cookies: Cookie, soldier: Soldier) {
-  const options = {
+  const options: RequestOption = {
     url: buildRequestUrl('missSoldier/insertDirectMissSoldierA.do'),
     method: 'POST',
-    json: true,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       Cookie: `${cookies.iuid}; ${cookies.token}`,
     },
-    form: {
+    data: {
       missSoldierClassCdNm: soldier.getMissSoldierClassCdNm(),
       grpCdNm: soldier.getGrpCdNm(),
       missSoldierClassCd: soldier.getMissSoldierClassCd(),
@@ -28,17 +25,18 @@ async function addSoldier(cookies: Cookie, soldier: Soldier) {
     },
   };
 
-  const response = await requestPromise(options, (err, res, body) => {
-    if (err) {
-      throw new Error(err);
-    }
+  const response = await request(options);
+  addLog('addSoldier', `${response.status} ${response.statusText}`);
 
-    addLog('addSoldier', `${res.statusCode} ${res.statusMessage}`);
+  const body = await response.data;
 
-    if (res.statusCode === 200 && body.resultCd !== '0000' && body.resultCd !== 'E001') {
-      throw new Error(body.resultMsg || '알 수 없는 에러.');
-    }
-  });
+  if (
+    response.status === 200 &&
+    body.resultCd !== '0000' &&
+    body.resultCd !== 'E001'
+  ) {
+    throw new Error(body.resultMsg || '알 수 없는 에러.');
+  }
 
   if (!response) {
     throw new Error('응답 값이 없습니다.');

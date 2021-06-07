@@ -1,7 +1,5 @@
-import requestPromise from 'request-promise';
-
 import { Cookie, Soldier } from '../models';
-import { addLog, buildRequestUrl } from '../utils';
+import { addLog, buildRequestUrl, request, RequestOption } from '../utils';
 
 /**
  * 군인 정보를 가져온다.
@@ -9,15 +7,14 @@ import { addLog, buildRequestUrl } from '../utils';
  * @param soldier - 확인할 군인 정보
  */
 async function fetchSoldiers(cookies: Cookie, soldier: Soldier) {
-  const options = {
+  const options: RequestOption = {
     url: buildRequestUrl('main/cafeCreateCheckA.do'),
     method: 'POST',
-    json: true,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       Cookie: `${cookies.iuid}; ${cookies.token}`,
     },
-    form: {
+    data: {
       name: soldier.getName(),
       birth: soldier.getBirth(),
       enterDate: soldier.getEnterDate(),
@@ -26,23 +23,19 @@ async function fetchSoldiers(cookies: Cookie, soldier: Soldier) {
     },
   };
 
-  const response = await requestPromise(options, (err, res, body) => {
-    if (err) {
-      throw new Error(err);
-    }
+  const response = await request(options);
+  addLog('fetchSoldier', `${response.status} ${response.statusText}`);
+  const body = await response.data;
 
-    addLog('fetchSoldier', `${res.statusCode} ${res.statusMessage}`);
-
-    if (res.statusCode === 200 && body.resultCd !== '9999') {
-      throw new Error(body.resultMsg || '알 수 없는 에러.');
-    }
-  });
+  if (response.status === 200 && body.resultCd !== '9999') {
+    throw new Error(body.resultMsg || '알 수 없는 에러.');
+  }
 
   if (!response) {
     throw new Error('응답 값이 없습니다.');
   }
 
-  const result: Soldier[] = response.listResult.map((fetchedSoldierInfo) => {
+  const result: Soldier[] = body.listResult.map((fetchedSoldierInfo) => {
     const { traineeMgrSeq } = fetchedSoldierInfo;
     const clonedSoldier = soldier.clone();
     clonedSoldier.setTraineeMgrSeq(traineeMgrSeq);
