@@ -16,7 +16,7 @@ const getPostContentType = (isJson?: boolean): string => {
   return 'application/x-www-form-urlencoded';
 };
 
-const removeUndefined = (object?: Object): Record<string, string> => {
+const removeUndefined = (object?: object): Record<string, string> => {
   const result: Record<string, string> = {};
   if (object) {
     Object.keys(object).forEach((key) => {
