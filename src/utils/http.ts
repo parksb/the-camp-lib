@@ -3,8 +3,8 @@ import axios from 'axios';
 export interface RequestOption {
   readonly method: 'GET' | 'POST';
   readonly url: string;
-  readonly headers?: any;
-  readonly data?: any;
+  headers?: any;
+  data?: any;
   readonly params?: any;
   readonly json?: boolean;
 }
