@@ -10,7 +10,7 @@ import { buildRequestUrl, addLog, request, RequestOption } from '../utils';
 async function sendMessage(
   cookies: Cookie,
   trainee: Soldier,
-  message: Message
+  message: Message,
 ) {
   if (trainee.getMissSoldierClassCd() !== SoldierClass['예비군인/훈련병']) {
     throw new Error('예비군인/훈련병에게만 편지를 보낼 수 있습니다.');
