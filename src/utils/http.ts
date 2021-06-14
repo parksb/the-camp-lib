@@ -3,8 +3,8 @@ import axios from 'axios';
 export interface RequestOption {
   readonly method: 'GET' | 'POST';
   readonly url: string;
-  headers?: any;
-  data?: any;
+  readonly headers?: any;
+  readonly data?: any;
   readonly params?: any;
   readonly json?: boolean;
 }
@@ -21,21 +21,41 @@ const removeUndefined = (object?: Object): Record<string, string> => {
   return result;
 };
 
-export const request = async (requestOption: RequestOption) => {
-  const options = {
-    ...requestOption,
-  };
-  if (options.method === 'POST') {
-    const headers = {
-      ...options.headers,
-    };
-    if (requestOption.json) {
-      headers['Content-Type'] = 'application/json';
-    } else {
-      headers['Content-Type'] = 'application/x-www-form-urlencoded';
-      options.data = new URLSearchParams(removeUndefined(requestOption.data));
-    }
-    options.headers = headers;
+const getPostContentType = (isJson?: boolean): string => {
+  if (isJson) {
+    return 'application/json';
   }
-  return axios(options);
+  return 'application/x-www-form-urlencoded';
+};
+
+const buildPostBody = (
+  isJson?: boolean,
+  data?: object,
+): object | string | undefined => {
+  if (isJson) {
+    return data;
+  }
+  if (!data) {
+    return data;
+  }
+  return new URLSearchParams(removeUndefined(data)).toString();
+};
+
+export const request = async (requestOption: RequestOption) => {
+  let headers = requestOption.headers;
+  let data = requestOption.data;
+  if (requestOption.method === 'POST') {
+    const contentType = getPostContentType(requestOption.json);
+    headers = {
+      ...requestOption.headers,
+      'Content-Type': contentType,
+    };
+    data = buildPostBody(requestOption.json, requestOption.data);
+  }
+  const option: RequestOption = {
+    ...requestOption,
+    headers,
+    data,
+  };
+  return axios(option);
 };
