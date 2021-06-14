@@ -33,10 +33,11 @@ async function sendMessage(
   };
 
   const response = await request(options);
-  addLog('sendMessage', `${response.status} ${response.statusText}`);
-  const body = await response.data;
+  addLog('sendMessage', `${response.statusCode} ${response.statusMessage}`);
 
-  if (response.status === 200 && body.resultCd !== '0000') {
+  const { body } = response;
+
+  if (response.statusCode === 200 && body.resultCd !== '0000') {
     throw new Error(body.resultMsg || '알 수 없는 에러.');
   }
 

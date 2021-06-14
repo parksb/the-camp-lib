@@ -26,15 +26,11 @@ async function addSoldier(cookies: Cookie, soldier: Soldier) {
   };
 
   const response = await request(options);
-  addLog('addSoldier', `${response.status} ${response.statusText}`);
+  addLog('addSoldier', `${response.statusCode} ${response.statusMessage}`);
 
-  const body = await response.data;
+  const { body } = response;
 
-  if (
-    response.status === 200 &&
-    body.resultCd !== '0000' &&
-    body.resultCd !== 'E001'
-  ) {
+  if (response.statusCode === 200 && body.resultCd !== '0000' && body.resultCd !== 'E001') {
     throw new Error(body.resultMsg || '알 수 없는 에러.');
   }
 

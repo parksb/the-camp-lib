@@ -24,10 +24,11 @@ async function fetchSoldiers(cookies: Cookie, soldier: Soldier) {
   };
 
   const response = await request(options);
-  addLog('fetchSoldier', `${response.status} ${response.statusText}`);
-  const body = await response.data;
+  addLog('fetchSoldier', `${response.statusCode} ${response.statusMessage}`);
 
-  if (response.status === 200 && body.resultCd !== '9999') {
+  const { body } = response;
+
+  if (response.statusCode === 200 && body.resultCd !== '9999') {
     throw new Error(body.resultMsg || '알 수 없는 에러.');
   }
 

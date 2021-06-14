@@ -29,10 +29,11 @@ async function login(id: string, password: string) {
   let result: Cookie | null = null;
 
   const response = await request(options);
-  addLog('login', `${response.status} ${response.statusText}`);
-  const body = await response.data;
+  addLog('login', `${response.statusCode} ${response.statusMessage}`);
 
-  if (response.status === 200 && body.resultCd !== '0000') {
+  const { body } = response;
+
+  if (response.statusCode === 200 && body.resultCd !== '0000') {
     throw new Error(body.resultMsg || '알 수 없는 에러.');
   }
 

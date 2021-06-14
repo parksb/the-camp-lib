@@ -9,6 +9,13 @@ export interface RequestOptions {
   readonly json?: boolean;
 }
 
+export interface HttpResponse {
+  headers: any;
+  statusCode: number;
+  statusMessage: string;
+  body: any;
+}
+
 const getPostContentType = (isJson?: boolean): string => {
   if (isJson) {
     return 'application/json';
@@ -41,7 +48,7 @@ const buildPostBody = (
   return new URLSearchParams(removeUndefined(data)).toString();
 };
 
-export const request = async (requestOption: RequestOptions) => {
+export const request = async (requestOption: RequestOptions): Promise<HttpResponse> => {
   let headers = requestOption.headers;
   let data = requestOption.form;
   if (requestOption.method === 'POST') {
@@ -58,5 +65,12 @@ export const request = async (requestOption: RequestOptions) => {
     method: requestOption.method,
     url: (requestOption.url || requestOption.uri),
   };
-  return axios(config);
+  const response = await axios(config);
+  const body = await response.data;
+  return {
+    body,
+    headers: response.headers,
+    statusCode: response.status,
+    statusMessage: response.statusText,
+  }
 };
