@@ -9,6 +9,13 @@ export interface RequestOption {
   readonly json?: boolean;
 }
 
+const getPostContentType = (isJson?: boolean): string => {
+  if (isJson) {
+    return 'application/json';
+  }
+  return 'application/x-www-form-urlencoded';
+};
+
 const removeUndefined = (object?: Object): Record<string, string> => {
   const result: Record<string, string> = {};
   if (object) {
@@ -19,13 +26,6 @@ const removeUndefined = (object?: Object): Record<string, string> => {
     });
   }
   return result;
-};
-
-const getPostContentType = (isJson?: boolean): string => {
-  if (isJson) {
-    return 'application/json';
-  }
-  return 'application/x-www-form-urlencoded';
 };
 
 const buildPostBody = (
