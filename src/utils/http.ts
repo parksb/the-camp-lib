@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 
 export interface RequestOption {
   readonly method: 'GET' | 'POST';
@@ -52,7 +52,7 @@ export const request = async (requestOption: RequestOption) => {
     };
     data = buildPostBody(requestOption.json, requestOption.data);
   }
-  const option: RequestOption = {
+  const option: AxiosRequestConfig = {
     ...requestOption,
     headers,
     data,
