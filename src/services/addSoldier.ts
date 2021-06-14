@@ -30,12 +30,12 @@ async function addSoldier(cookies: Cookie, soldier: Soldier) {
 
   const { body } = response;
 
-  if (response.statusCode === 200 && body.resultCd !== '0000' && body.resultCd !== 'E001') {
-    throw new Error(body.resultMsg || '알 수 없는 에러.');
+  if (!body) {
+    throw new Error('응답 값이 없습니다.');
   }
 
-  if (!response) {
-    throw new Error('응답 값이 없습니다.');
+  if (response.statusCode === 200 && body.resultCd !== '0000' && body.resultCd !== 'E001') {
+    throw new Error(body.resultMsg || '알 수 없는 에러.');
   }
 
   return true;
