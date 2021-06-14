@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 
-import { buildRequestUrl, request, RequestOption } from '../../../src/utils';
+import { buildRequestUrl, request, RequestOptions } from '../../../src/utils';
 
-const options = (userId?: string, userPwd?: string): RequestOption => {
+const options = (userId?: string, userPwd?: string): RequestOptions => {
   return {
     url: buildRequestUrl('login/loginA.do'),
     method: 'POST',

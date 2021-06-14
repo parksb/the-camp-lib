@@ -1,5 +1,5 @@
 import { Soldier, Message, Cookie, SoldierClass } from '../models';
-import { buildRequestUrl, addLog, request, RequestOption } from '../utils';
+import { buildRequestUrl, addLog, request, RequestOptions } from '../utils';
 
 /**
  * 인터넷 편지를 전송한다.
@@ -16,7 +16,7 @@ async function sendMessage(
     throw new Error('예비군인/훈련병에게만 편지를 보낼 수 있습니다.');
   }
 
-  const options: RequestOption = {
+  const options: RequestOptions = {
     uri: buildRequestUrl('consolLetter/insertConsolLetterA.do?'),
     method: 'POST',
     headers: {

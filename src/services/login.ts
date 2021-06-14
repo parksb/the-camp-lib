@@ -4,7 +4,7 @@ import {
   buildRequestUrl,
   extractCookies,
   request,
-  RequestOption,
+  RequestOptions,
 } from '../utils';
 
 /**
@@ -13,7 +13,7 @@ import {
  * @param password - 계정 비밀번호
  */
 async function login(id: string, password: string) {
-  const options: RequestOption = {
+  const options: RequestOptions = {
     url: buildRequestUrl('login/loginA.do'),
     method: 'POST',
     headers: {

@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
-export interface RequestOption {
+export interface RequestOptions {
   readonly method: 'GET' | 'POST';
   readonly uri?: string;
   readonly url?: string;
@@ -41,7 +41,7 @@ const buildPostBody = (
   return new URLSearchParams(removeUndefined(data)).toString();
 };
 
-export const request = async (requestOption: RequestOption) => {
+export const request = async (requestOption: RequestOptions) => {
   let headers = requestOption.headers;
   let data = requestOption.form;
   if (requestOption.method === 'POST') {
@@ -52,11 +52,11 @@ export const request = async (requestOption: RequestOption) => {
     };
     data = buildPostBody(requestOption.json, requestOption.form);
   }
-  const option: AxiosRequestConfig = {
+  const config: AxiosRequestConfig = {
     headers,
     data,
     method: requestOption.method,
     url: (requestOption.url || requestOption.uri),
   };
-  return axios(option);
+  return axios(config);
 };
