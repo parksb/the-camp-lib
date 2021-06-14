@@ -1,9 +1,9 @@
 import { expect } from 'chai';
 
-import { buildRequestUrl, request, RequestOptions } from '../../src/utils';
+import { buildRequestUrl, request, HttpRequestOptions } from '../../src/utils';
 
 const url = 'main/cafeCreateCheckA.do';
-const options: RequestOptions = {
+const options: HttpRequestOptions = {
   url: buildRequestUrl(url),
   method: 'POST',
   json: true,

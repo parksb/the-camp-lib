@@ -1,5 +1,5 @@
 import { Cookie, Soldier } from '../models';
-import { addLog, buildRequestUrl, request, RequestOptions } from '../utils';
+import { addLog, buildRequestUrl, request, HttpRequestOptions } from '../utils';
 
 /**
  * 군인 정보를 가져온다.
@@ -7,7 +7,7 @@ import { addLog, buildRequestUrl, request, RequestOptions } from '../utils';
  * @param soldier - 확인할 군인 정보
  */
 async function fetchSoldiers(cookies: Cookie, soldier: Soldier) {
-  const options: RequestOptions = {
+  const options: HttpRequestOptions = {
     url: buildRequestUrl('main/cafeCreateCheckA.do'),
     method: 'POST',
     headers: {

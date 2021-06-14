@@ -1,5 +1,5 @@
 import { Cookie, Soldier } from '../models';
-import { addLog, buildRequestUrl, request, RequestOptions } from '../utils';
+import { addLog, buildRequestUrl, request, HttpRequestOptions } from '../utils';
 
 /**
  * 군인을 추가한다.
@@ -7,7 +7,7 @@ import { addLog, buildRequestUrl, request, RequestOptions } from '../utils';
  * @param soldier - 추가할 군인 정보
  */
 async function addSoldier(cookies: Cookie, soldier: Soldier) {
-  const options: RequestOptions = {
+  const options: HttpRequestOptions = {
     url: buildRequestUrl('missSoldier/insertDirectMissSoldierA.do'),
     method: 'POST',
     headers: {

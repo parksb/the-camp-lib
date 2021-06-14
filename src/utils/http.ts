@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
-export interface RequestOptions {
+export interface HttpRequestOptions {
   readonly method: 'GET' | 'POST';
   readonly uri?: string;
   readonly url?: string;
@@ -48,7 +48,7 @@ const buildPostBody = (
   return new URLSearchParams(removeUndefined(data)).toString();
 };
 
-export const request = async (requestOption: RequestOptions): Promise<HttpResponse> => {
+export const request = async (requestOption: HttpRequestOptions): Promise<HttpResponse> => {
   let headers = requestOption.headers;
   let data = requestOption.form;
   if (requestOption.method === 'POST') {
