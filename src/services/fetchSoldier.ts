@@ -14,7 +14,7 @@ async function fetchSoldiers(cookies: Cookie, soldier: Soldier) {
       'Content-Type': 'application/x-www-form-urlencoded',
       Cookie: `${cookies.iuid}; ${cookies.token}`,
     },
-    data: {
+    form: {
       name: soldier.getName(),
       birth: soldier.getBirth(),
       enterDate: soldier.getEnterDate(),

@@ -19,7 +19,7 @@ async function login(id: string, password: string) {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
-    data: {
+    form: {
       state: 'email-login',
       autoLoginYn: 'N',
       userId: id,

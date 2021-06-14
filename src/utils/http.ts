@@ -2,10 +2,10 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 export interface RequestOption {
   readonly method: 'GET' | 'POST';
-  readonly url: string;
+  readonly uri?: string;
+  readonly url?: string;
   readonly headers?: any;
-  readonly data?: any;
-  readonly params?: any;
+  readonly form?: any;
   readonly json?: boolean;
 }
 
@@ -43,19 +43,20 @@ const buildPostBody = (
 
 export const request = async (requestOption: RequestOption) => {
   let headers = requestOption.headers;
-  let data = requestOption.data;
+  let data = requestOption.form;
   if (requestOption.method === 'POST') {
     const contentType = getPostContentType(requestOption.json);
     headers = {
       ...requestOption.headers,
       'Content-Type': contentType,
     };
-    data = buildPostBody(requestOption.json, requestOption.data);
+    data = buildPostBody(requestOption.json, requestOption.form);
   }
   const option: AxiosRequestConfig = {
-    ...requestOption,
     headers,
     data,
+    method: requestOption.method,
+    url: (requestOption.url || requestOption.uri),
   };
   return axios(option);
 };

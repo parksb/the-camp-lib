@@ -9,7 +9,7 @@ const options = (userId?: string, userPwd?: string): RequestOption => {
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
-    data: {
+    form: {
       userId,
       userPwd,
       state: 'email-login',

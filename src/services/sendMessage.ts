@@ -17,13 +17,13 @@ async function sendMessage(
   }
 
   const options: RequestOption = {
-    url: buildRequestUrl('consolLetter/insertConsolLetterA.do?'),
+    uri: buildRequestUrl('consolLetter/insertConsolLetterA.do?'),
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       Cookie: `${cookies.iuid}; ${cookies.token}`,
     },
-    data: {
+    form: {
       traineeMgrSeq: message.getTraineeMgrSeq(),
       sympathyLetterContent: message.getSympathyLetterContent(),
       sympathyLetterSubject: message.getSympathyLetterSubject(),

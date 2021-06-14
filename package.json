@@ -17,6 +17,9 @@
   },
   "author": "ParkSB <parkgds@gmail.com> (https://parksb.github.io/)",
   "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
@@ -35,8 +38,5 @@
     "tslint": "^5.19.0",
     "tslint-config-airbnb": "^5.11.1",
     "typescript": "^3.5.3"
-  },
-  "dependencies": {
-    "axios": "^0.21.1"
   }
 }
