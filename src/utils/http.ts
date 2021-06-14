@@ -37,5 +37,5 @@ export const request = async (requestOption: RequestOption) => {
     }
     options.headers = headers;
   }
-  return await axios(options);
+  return axios(options);
 };
