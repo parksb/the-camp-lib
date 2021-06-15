@@ -72,5 +72,5 @@ export const request = async (requestOption: HttpRequestOptions): Promise<HttpRe
     headers: response.headers,
     statusCode: response.status,
     statusMessage: response.statusText,
-  }
+  };
 };
