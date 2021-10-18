@@ -2,6 +2,12 @@
 
 [![npm downloads](https://img.shields.io/npm/dt/the-camp-lib?style=flat-square)](https://www.npmjs.com/package/the-camp-lib) [![npm version](https://img.shields.io/npm/v/the-camp-lib?style=flat-square)](https://www.npmjs.com/package/the-camp-lib) [![health check](https://img.shields.io/github/workflow/status/ParkSB/the-camp-lib/HealthCheck/master?label=health%20check&style=flat-square)](https://github.com/ParkSB/the-camp-lib/actions?query=workflow%3A"HealthCheck") [![npm license](https://img.shields.io/npm/l/the-camp-lib?style=flat-square)](LICENSE)
 
+> :warning: 이 라이브러리는 더 캠프 서비스의 공식 API 라이브러리가 아닙니다. 따라서 예고없이 API 제공이 정지되거나, 동작이 변경될 수 있습니다.
+
+> :no_good: 사용자는 더 캠프 서비스의 운영을 고의로 방해하기 위한 목적으로 이 라이브러리를 사용해서는 안됩니다. 서비스에 과도한 트래픽을 발생시키거나 결함을 유발하는 등 서비스 운영을 방해하는 행위를 하지 않도록 주의해주세요. 사용자가 이 라이브러리를 사용하여 발생한 결과에 대해 프로젝트 오너와 메인테이너는 어떠한 책임도 부담하지 않습니다. 
+
+> :envelope: 라이브러리에 대한 문의는 [이슈](https://github.com/parksb/the-camp-lib/issues)로 등록해주세요.
+
 대국민 국군 소통 서비스 [더 캠프](http://www.thecamp.or.kr/)를 사이트 외부에서 이용하기 위해 만든 비공식 라이브러리입니다. 현재 인터넷 편지 발송을 중심으로 구현되어 있습니다. 매주 월요일 0시 [API의 유효성을 체크](https://github.com/ParkSB/the-camp-lib/actions?query=workflow%3A%22HealthCheck%22)합니다. `passing` 상태가 아니라면 API가 동작하지 않는다는 의미이니 참고해주세요.
 
 # Installation
@@ -196,3 +202,4 @@ $ npm install
 # License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
