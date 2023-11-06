@@ -1,10 +1,12 @@
 # THE CAMP Unofficial Library
 
-[![npm downloads](https://img.shields.io/npm/dt/the-camp-lib?style=flat-square)](https://www.npmjs.com/package/the-camp-lib) [![npm version](https://img.shields.io/npm/v/the-camp-lib?style=flat-square)](https://www.npmjs.com/package/the-camp-lib) [![health check](https://img.shields.io/github/workflow/status/ParkSB/the-camp-lib/HealthCheck/master?label=health%20check&style=flat-square)](https://github.com/ParkSB/the-camp-lib/actions?query=workflow%3A"HealthCheck") [![npm license](https://img.shields.io/npm/l/the-camp-lib?style=flat-square)](LICENSE)
+[![npm downloads](https://img.shields.io/npm/dt/the-camp-lib?style=flat-square)](https://www.npmjs.com/package/the-camp-lib) [![npm version](https://img.shields.io/npm/v/the-camp-lib?style=flat-square)](https://www.npmjs.com/package/the-camp-lib) [![health check](https://img.shields.io/github/actions/workflow/status/parksb/the-camp-lib/healthCheck.yml?branch=master&label=health%20check&style=flat-square)](https://github.com/parksb/the-camp-lib/actions?query=workflow%3A"HealthCheck") [![npm license](https://img.shields.io/npm/l/the-camp-lib?style=flat-square)](LICENSE)
+
+> :stop_sign: **육군훈련소가 휴대전화 사용을 허가하면서 인터넷 편지 서비스를 중단했습니다. ([육군훈련소 공지](https://www.katc.mil.kr/katc/intro/katc_notice.jsp?mode=view&article_no=22274701)) 사단 신병교육대에서도 훈련병의 휴대전화 사용을 허가하고 있으므로, 앞으로는 더 캠프를 통해 작성한 편지가 출력물로 전달되지 않을 가능성이 높습니다. ([더 캠프 공지](https://www.thecamp.or.kr/notice/viewNoticeDetail.do?noticeMgrSeq=26236)) 이에 따라 the-camp-lib의 유지보수를 중단합니다. 감사합니다. (2023년 11월 6일)**
 
 > :warning: 이 라이브러리는 더 캠프 서비스의 공식 API 라이브러리가 아닙니다. 따라서 예고없이 API 제공이 정지되거나, 동작이 변경될 수 있습니다.
 
-> :no_good: 사용자는 더 캠프 서비스의 운영을 고의로 방해하기 위한 목적으로 이 라이브러리를 사용해서는 안됩니다. 서비스에 과도한 트래픽을 발생시키거나 결함을 유발하는 등 서비스 운영을 방해하는 행위를 하지 않도록 주의해주세요. 사용자가 이 라이브러리를 사용하여 발생한 결과에 대해 프로젝트 오너와 메인테이너는 어떠한 책임도 부담하지 않습니다. 
+> :no_good: 사용자는 더 캠프 서비스의 운영을 고의로 방해하기 위한 목적으로 이 라이브러리를 사용해서는 안됩니다. 서비스에 과도한 트래픽을 발생시키거나 결함을 유발하는 등 서비스 운영을 방해하는 행위를 하지 않도록 주의해주세요. 사용자가 이 라이브러리를 사용하여 발생한 결과에 대해 프로젝트 오너와 메인테이너는 어떠한 책임도 부담하지 않습니다.
 
 > :envelope: 라이브러리에 대한 문의는 [이슈](https://github.com/parksb/the-camp-lib/issues)로 등록해주세요.
 
@@ -35,13 +37,13 @@ async function main() {
   );
 
   const client = new thecamp.Client();
-  
+
   await client.login('user@email.com', 'password');
   await client.addSoldier(soldier);
- 
+
   const [trainee] = await client.fetchSoldiers(soldier);
   const message = new thecamp.Message('Test title', 'Test content', trainee);
- 
+
   await client.sendMessage(soldier, message);
 }
 ```
@@ -80,11 +82,11 @@ $ npm install
 * `missSoldierClassCd: SoldierClass` - 성분 코드
 * `grpCdNm: SoldierGroupName` - 군종
 * `grpCd: SoldierGroup` - 군종 코드
-* `name: string` - 이름 
-* `birth: string` - 생년월일 
-* `enterDate: string` - 입열 날짜 
+* `name: string` - 이름
+* `birth: string` - 생년월일
+* `enterDate: string` - 입열 날짜
 * `trainUnitCd: SoldierUnit` - 입영부대 코드
-* `trainUnitNm: SoldierUnitNm` - 입영부대 
+* `trainUnitNm: SoldierUnitNm` - 입영부대
 * `missSoldierRelationshipCd: SoldierRelationship` - 관계 코드
 * `traineeMgrSeq?: string` - 훈련병 식별 코드
 
@@ -181,7 +183,7 @@ $ npm install
 
 ### `sendMessage(cookies: Cookie, trainee: Soldier, message: Message)`
 
-인터넷 편지를 전송한다. 
+인터넷 편지를 전송한다.
 
 * **Parameters**
   * `cookies: Cookie` - 세션 식별을 위한 쿠키
